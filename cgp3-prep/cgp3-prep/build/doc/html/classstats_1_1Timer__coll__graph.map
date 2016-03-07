@@ -1,0 +1,3 @@
+<map id="stats::Timer" name="stats::Timer">
+<area shape="rect" id="node2" href="$classstats_1_1TimerBase.html" title="Base class for all timers, which does not specify how the time is to be collected. " alt="" coords="5,5,128,32"/>
+</map>

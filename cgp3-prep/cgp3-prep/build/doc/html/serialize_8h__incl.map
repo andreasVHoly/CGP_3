@@ -1,0 +1,4 @@
+<map id="common/serialize.h" name="common/serialize.h">
+<area shape="rect" id="node7" href="$debug__vector_8h.html" title="Define uts::vector as either std::vector or __gnu_debug::vector depending on UTS_DEBUG_CONTAINERS. " alt="" coords="622,88,732,115"/>
+<area shape="rect" id="node9" href="$debug__list_8h.html" title="Define uts::list as either std::list or __gnu_debug::list depending on UTS_DEBUG_CONTAINERS. " alt="" coords="757,88,848,115"/>
+</map>

@@ -1,0 +1,3 @@
+<map id="stats::TimerBase" name="stats::TimerBase">
+<area shape="rect" id="node2" href="$classstats_1_1Timer.html" title="Timer that measures its own elapsed lifetime and reports it to stdout on termination. " alt="" coords="21,80,112,107"/>
+</map>

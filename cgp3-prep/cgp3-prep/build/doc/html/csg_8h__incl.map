@@ -1,0 +1,16 @@
+<map id="tesselate/csg.h" name="tesselate/csg.h">
+<area shape="rect" id="node5" href="$mesh_8h.html" title="Data structure representing a triangle mesh in 3D space. " alt="" coords="1894,80,1959,107"/>
+<area shape="rect" id="node6" href="$renderer_8h_source.html" title="renderer.h" alt="" coords="1188,229,1267,256"/>
+<area shape="rect" id="node40" href="$ffd_8h.html" title="Free&#45;form Deformation to warp vertices of a mesh. " alt="" coords="1903,155,1951,181"/>
+<area shape="rect" id="node41" href="$voxels_8h.html" title="VoxelVolume class for storing a 3d cuboid of binary voxel data. " alt="" coords="1954,379,2024,405"/>
+<area shape="rect" id="node11" href="$glheaders_8h_source.html" title="glheaders.h" alt="" coords="602,379,691,405"/>
+<area shape="rect" id="node19" href="$debug__string_8h.html" title="Define uts::string as either std::string or __gnu_debug::string depending on UTS_DEBUG_CONTAINERS. " alt="" coords="203,461,364,488"/>
+<area shape="rect" id="node20" href="$shaderProgram_8h_source.html" title="shaderProgram.h" alt="" coords="294,304,415,331"/>
+<area shape="rect" id="node25" href="$shape_8h.html" title="ShapeGeometry class for rendering shapes in triangle mesh format. " alt="" coords="794,304,861,331"/>
+<area shape="rect" id="node21" href="$source2cpp_8h.html" title="Utilities for retrieving GLSL or CL source strings that have been baked into the executable. " alt="" coords="211,379,364,405"/>
+<area shape="rect" id="node22" href="$debug__unordered__map_8h.html" title="Define uts::unordered_map as either std::unordered_map or __gnu_debug::unordered_map depending on UTS..." alt="" coords="5,454,179,495"/>
+<area shape="rect" id="node26" href="$view_8h.html" title="Controlling viewpoint changes. " alt="" coords="1143,379,1203,405"/>
+<area shape="rect" id="node27" href="$vecpnt_8h.html" title="Basic vector and point arithmetic library. " alt="" coords="1319,461,1391,488"/>
+<area shape="rect" id="node36" href="$tesselate_2timer_8h.html" title="Fairly accurate timing routines. " alt="" coords="1037,461,1099,488"/>
+<area shape="rect" id="node38" href="$debug__vector_8h.html" title="Define uts::vector as either std::vector or __gnu_debug::vector depending on UTS_DEBUG_CONTAINERS. " alt="" coords="1415,461,1579,488"/>
+</map>

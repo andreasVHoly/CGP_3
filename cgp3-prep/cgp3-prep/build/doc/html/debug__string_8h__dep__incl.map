@@ -1,0 +1,20 @@
+<map id="common/debug_string.h" name="common/debug_string.h">
+<area shape="rect" id="node2" href="$obj_8h.html" title="OBJ format export. " alt="" coords="23,80,127,107"/>
+<area shape="rect" id="node4" href="$source2cpp_8h.html" title="Utilities for retrieving GLSL or CL source strings that have been baked into the executable. " alt="" coords="167,80,320,107"/>
+<area shape="rect" id="node6" href="$renderer_8h_source.html" title="tesselate/renderer.h" alt="" coords="231,229,368,256"/>
+<area shape="rect" id="node14" href="$stats_8h.html" title="Utilities for recording statistics. " alt="" coords="402,80,517,107"/>
+<area shape="rect" id="node16" href="$common_2timer_8cpp.html" title="Utilities to simplify profiling. " alt="" coords="556,155,685,181"/>
+<area shape="rect" id="node17" href="$str_8h.html" title="Misc string utilities. " alt="" coords="594,80,696,107"/>
+<area shape="rect" id="node18" href="$common_2timer_8h.html" title="Utilities to simplify profiling. " alt="" coords="721,80,836,107"/>
+<area shape="rect" id="node19" href="$testutil_8cpp.html" title="test/testutil.cpp" alt="" coords="861,80,972,107"/>
+<area shape="rect" id="node3" href="$obj_8cpp.html" title="OBJ format export. " alt="" coords="5,155,123,181"/>
+<area shape="rect" id="node5" href="$shaderProgram_8h_source.html" title="tesselate/shaderProgram.h" alt="" coords="148,155,327,181"/>
+<area shape="rect" id="node7" href="$mesh_8h.html" title="Data structure representing a triangle mesh in 3D space. " alt="" coords="189,379,312,405"/>
+<area shape="rect" id="node9" href="$glwidget_8h_source.html" title="tesselate/glwidget.h" alt="" coords="276,528,415,555"/>
+<area shape="rect" id="node13" href="$ffd_8h.html" title="Free&#45;form Deformation to warp vertices of a mesh. " alt="" coords="247,304,352,331"/>
+<area shape="rect" id="node8" href="$csg_8h.html" title="Constructive Solid Geometry binary tree, with internal nodes representing binary set operations and l..." alt="" coords="98,453,208,480"/>
+<area shape="rect" id="node12" href="$test__mesh_8h_source.html" title="test/test_mesh.h" alt="" coords="233,453,353,480"/>
+<area shape="rect" id="node11" href="$test__csg_8h_source.html" title="test/test_csg.h" alt="" coords="99,528,208,555"/>
+<area shape="rect" id="node10" href="$window_8h_source.html" title="tesselate/window.h" alt="" coords="278,603,412,629"/>
+<area shape="rect" id="node15" href="$stats_8cpp.html" title="Utilities for recording statistics. " alt="" coords="401,155,531,181"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="common/debug_vector.h" name="common/debug_vector.h">
+<area shape="rect" id="node2" href="$serialize_8h.html" title="Serialization helpers. " alt="" coords="5,80,139,107"/>
+<area shape="rect" id="node3" href="$common_2timer_8cpp.html" title="Utilities to simplify profiling. " alt="" coords="120,155,249,181"/>
+<area shape="rect" id="node4" href="$common_2timer_8h.html" title="Utilities to simplify profiling. " alt="" coords="215,80,331,107"/>
+<area shape="rect" id="node5" href="$view_8h.html" title="Controlling viewpoint changes. " alt="" coords="356,80,472,107"/>
+<area shape="rect" id="node10" href="$glwidget_8h_source.html" title="tesselate/glwidget.h" alt="" coords="365,528,504,555"/>
+<area shape="rect" id="node6" href="$shape_8h.html" title="ShapeGeometry class for rendering shapes in triangle mesh format. " alt="" coords="289,155,415,181"/>
+<area shape="rect" id="node7" href="$renderer_8h_source.html" title="tesselate/renderer.h" alt="" coords="266,229,403,256"/>
+<area shape="rect" id="node8" href="$mesh_8h.html" title="Data structure representing a triangle mesh in 3D space. " alt="" coords="208,379,331,405"/>
+<area shape="rect" id="node14" href="$ffd_8h.html" title="Free&#45;form Deformation to warp vertices of a mesh. " alt="" coords="266,304,371,331"/>
+<area shape="rect" id="node9" href="$csg_8h.html" title="Constructive Solid Geometry binary tree, with internal nodes representing binary set operations and l..." alt="" coords="117,453,227,480"/>
+<area shape="rect" id="node13" href="$test__mesh_8h_source.html" title="test/test_mesh.h" alt="" coords="252,453,372,480"/>
+<area shape="rect" id="node12" href="$test__csg_8h_source.html" title="test/test_csg.h" alt="" coords="117,528,227,555"/>
+<area shape="rect" id="node11" href="$window_8h_source.html" title="tesselate/window.h" alt="" coords="367,603,501,629"/>
+</map>
