@@ -846,7 +846,7 @@ bool Mesh::pointContainment(cgp::Point pnt)
         else // point is inside
             incount++;
     }
-    
+
     // consensus wins
     return (incount > outcount);
 }
@@ -893,18 +893,21 @@ void Mesh::boxFit(float sidelen)
 
 void Mesh::marchingCubes(VoxelVolume vox)
 {
+    //TODO
     // stub, needs completing
 }
 
 void Mesh::laplacianSmooth(int iter, float rate)
 {
     // stub, needs completing
+    //TODO
     deriveFaceNorms();
     deriveVertNorms();
 }
 
 void Mesh::applyFFD(ffd * lat)
 {
+    //TODO
     // stub, needs completing
 }
 
@@ -1153,7 +1156,7 @@ bool Mesh::basicValidity()
             cerr << "Error Mesh::basicValidity(): dangling vertex found" << endl;
             return false; // early out
         }
-    
+
     return true;
 }
 

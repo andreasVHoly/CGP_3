@@ -216,7 +216,20 @@ cgp::Point VoxelVolume::getVoxelPos(int x, int y, int z)
 int VoxelVolume::getMCVertIdx(int x, int y, int z)
 {
     // stub, needs completing
+    //TODO
     // refer to data structures at the top of voxels.cpp and mesh.cpp
+
+    //we create a int to hold the 8 positions either being on or off
+    int structure = 0;
+    //go through the int
+    for (int i = 0; i < 8; i++){
+        //get the point of each of the 8 edges based on the calculation
+        if (get( (x + cubePos[i][0]) , (y + cubePos[i][1]) , (z + cubePos[i][2]) )){
+            structure |= 1 << i;
+        }
+    }
+
+
     return 0;
 }
 
