@@ -244,7 +244,7 @@ int VoxelVolume::getMCVertIdx(int x, int y, int z)
     }
 
 
-    return 0;
+    return structure;
 }
 
 int VoxelVolume::getMCEdgeIdx(int vcode)
