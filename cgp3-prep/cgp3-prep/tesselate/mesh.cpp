@@ -901,9 +901,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
     int vertlist[12];
     cgp::Point asEdgeVertex[12];
 
-    for (int x = 0; x < xDim; x++){
-        for (int y = 0; y < yDim; y++){
-            for (int z = 0; z < zDim; z++){
+    for (int x = 0; x < xDim-1; x++){
+        for (int y = 0; y < yDim-1; y++){
+            for (int z = 0; z < zDim-1s; z++){
                 //we get the cube with values set/not set
                 int caseInt = vox.getMCVertIdx(x,y,z);
                 int result = vox.getMCEdgeIdx(caseInt);
@@ -911,9 +911,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
                 //triangleTable[value]
 
 
-                if (result == 0){
-                    cout << "entirely outside" << endl;
-                }
+                /*if (result == 0){
+                    //cout << "entirely outside" << endl;
+                }*/
 
                 //Find the vertices where the surface intersects the cube
                 for (int i = 0; i < 12; i++){
