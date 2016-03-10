@@ -911,9 +911,10 @@ void Mesh::marchingCubes(VoxelVolume vox)
                 //triangleTable[value]
 
 
-                /*if (result == 0){
+                if (result == 0){
                     //cout << "entirely outside" << endl;
-                }*/
+                    return;
+                }
 
                 //Find the vertices where the surface intersects the cube
                 for (int i = 0; i < 12; i++){
