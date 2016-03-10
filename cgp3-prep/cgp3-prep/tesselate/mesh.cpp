@@ -903,7 +903,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
     for (int x = 0; x < xDim-1; x++){
         for (int y = 0; y < yDim-1; y++){
-            for (int z = 0; z < zDim-1s; z++){
+            for (int z = 0; z < zDim-1; z++){
                 //we get the cube with values set/not set
                 int caseInt = vox.getMCVertIdx(x,y,z);
                 int result = vox.getMCEdgeIdx(caseInt);
