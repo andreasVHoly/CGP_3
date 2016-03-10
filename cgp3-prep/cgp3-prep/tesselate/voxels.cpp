@@ -213,6 +213,20 @@ cgp::Point VoxelVolume::getVoxelPos(int x, int y, int z)
     return pnt;
 }
 
+cgp::Point VoxelVolume::getVoxelPosAtPoint(int x, int y, int z, cgp::Point point)
+{
+    cgp::Point pnt;
+    cgp::Vector halfcell;
+    float px, py, pz;
+
+    px = (float) x / (float) (xdim-1);
+    py = (float) y / (float) (ydim-1);
+    pz = (float) z / (float) (zdim-1);
+
+    pnt = cgp::Point(point.x + px * diagonal.i, point.y + py * diagonal.j, point.z + pz * diagonal.k); // convert from voxel space to world coordinates
+    return pnt;
+}
+
 int VoxelVolume::getMCVertIdx(int x, int y, int z)
 {
     // stub, needs completing
@@ -223,7 +237,7 @@ int VoxelVolume::getMCVertIdx(int x, int y, int z)
     int structure = 0;
     //go through the int
     for (int i = 0; i < 8; i++){
-        //get the point of each of the 8 edges based on the calculation
+        //get the point of each of the 8 edges based on the calculation values in the cubePos
         if (get( (x + cubePos[i][0]) , (y + cubePos[i][1]) , (z + cubePos[i][2]) )){
             structure |= 1 << i;
         }

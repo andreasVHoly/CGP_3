@@ -893,8 +893,86 @@ void Mesh::boxFit(float sidelen)
 
 void Mesh::marchingCubes(VoxelVolume vox)
 {
-    //TODO
-    // stub, needs completing
+    //gte dimensions
+    int xDim=0,yDim=0,zDim=0;
+    int ivertex = 0;
+    vox.getDim(xDim,yDim,zDim);
+    cgp::Point offset;
+    int vertlist[12];
+    cgp::Point asEdgeVertex[12];
+
+    for (int x = 0; x < xDim; x++){
+        for (int y = 0; y < yDim; y++){
+            for (int z = 0; z < zDim; z++){
+                //we get the cube with values set/not set
+                int caseInt = vox.getMCVertIdx(x,y,z);
+                int result = vox.getMCEdgeIdx(caseInt);
+
+                //triangleTable[value]
+
+
+                if (result == 0){
+                    cout << "entirely outside" << endl;
+                }
+
+                //Find the vertices where the surface intersects the cube
+                for (int i = 0; i < 12; i++){
+                    //if there is an intersection on this edge
+                    if(result & (1<< i))
+                    {
+                            offset = vox.getMCEdgeXsect(i);
+
+                            //void getFrame(cgp::Point &corner, cgp::Vector &diag);
+                            cgp::Point corner;
+                            cgp::Vector diag;
+                            vox.getFrame(corner,diag);
+
+                            float px, py, pz;
+
+                            px = (float) x / (float) (xDim-1);
+                            py = (float) y / (float) (yDim-1);
+                            pz = (float) z / (float) (zDim-1);
+
+                            asEdgeVertex[i] = vox.getVoxelPosAtPoint(x, y, z, offset);
+
+                    }
+                }
+
+
+
+                //Draw the triangles that were found.  There can be up to five per cube
+                for(int j = 0; j < 5; j++)
+                {
+                        if(triangleTable[caseInt][3*j] < 0){
+                            break;
+                        }
+
+                        Triangle tempTri;
+                        for(int k = 0; k < 3; k++)
+                        {
+                                ivertex = triangleTable[caseInt][3*j+k];
+
+                                //pushes corner
+                                verts.push_back(asEdgeVertex[ivertex]);
+
+                                //gets the last element
+                                tempTri.v[k] = verts.size()-1;
+
+                        }
+                        tris.push_back(tempTri);
+                }
+
+
+
+            }
+        }
+    }
+
+
+    mergeVerts();
+    deriveFaceNorms();
+    deriveVertNorms();
+
 }
 
 void Mesh::laplacianSmooth(int iter, float rate)

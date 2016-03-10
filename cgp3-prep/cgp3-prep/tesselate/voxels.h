@@ -44,6 +44,8 @@ private:
 
 public:
 
+    cgp::Point getVoxelPosAtPoint(int x, int y, int z, cgp::Point point);
+
     /// Default constructor
     VoxelVolume();
 
@@ -114,8 +116,7 @@ public:
 
     /**
      * Find the world-space position of the centre of a voxel
-     * @param x, y, z   3D location, zero indexed
-     * @returns voxel centre point 
+     * @param x, y, z   3D locat
      */
     cgp::Point getVoxelPos(int x, int y, int z);
 
