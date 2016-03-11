@@ -943,7 +943,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
                         }
 
                         Triangle tempTri;
-                        for(int k = 0; k < 3; k++)
+                        for(int k = 2; k >= 0; k--)
                         {
                                 ivertex = triangleTable[caseInt][3*j+k];
 
