@@ -216,20 +216,6 @@ string
 glm/glm.hpp
 -
 
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/tesselate/voxels.cpp
-voxels.h
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/tesselate/voxels.h
-stdio.h
--
-math.h
--
-string.h
--
-iostream
--
-limits
--
-
 /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/tesselate/voxels.h
 vector
 -

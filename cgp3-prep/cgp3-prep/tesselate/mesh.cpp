@@ -948,9 +948,8 @@ void Mesh::marchingCubes(VoxelVolume vox)
         }
     }
 
-    cout << count << endl;
-    mergeVerts();
 
+    mergeVerts();
     //switching these 2 around we get div by 0 error
 
     deriveFaceNorms();
@@ -959,8 +958,39 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 void Mesh::laplacianSmooth(int iter, float rate)
 {
-    // stub, needs completing
-    //TODO
+    //populate the edges vector
+    edges.clear();
+
+    //sort the edges - shouldnt do this
+    //hashEdgeSort();
+    buildAdjList();
+
+
+    int key = 0;
+
+
+
+    for(auto i = adjList.begin(); i != adjList.end(); i++){
+
+        //vi = vi + L * sum(wij (vj - vi))
+
+        float totalX = 0, totalY = 0, totalZ = 0;
+        int size = i->second.size();
+        int weight = 1/size;
+        for (int h = 0; h < size; h++){
+            //get the adjcent vertex
+            totalX += weight*(verts[i->second[h]].x - verts[key].x);
+            totalY += weight*(verts[i->second[h]].y - verts[key].y);
+            totalZ += weight*(verts[i->second[h]].z - verts[key].z);
+        }
+
+        verts[key].x += rate * totalX;
+        verts[key].y += rate * totalY;
+        verts[key].z += rate * totalZ;
+        key++;
+    }
+
+    mergeVerts();
     deriveFaceNorms();
     deriveVertNorms();
 }
@@ -970,6 +1000,107 @@ void Mesh::applyFFD(ffd * lat)
     //TODO
     // stub, needs completing
 }
+
+
+void Mesh::buildAdjList(){
+
+    adjList.clear();
+    for (int i = 0; i < tris.size(); i++){
+        adjList[tris[i].v[0]].push_back(tris[i].v[1]);
+        adjList[tris[i].v[1]].push_back(tris[i].v[2]);
+        adjList[tris[i].v[2]].push_back(tris[i].v[0]);
+    }
+}
+
+void Mesh::hashEdgeSort(){
+    /*windingError = 0;
+    //clean edges are stored in here
+    vector<Edge> cleanEdges;
+    int key;
+    int i, hitcount = 0, counter = 0;
+
+    // remove duplicate edges
+    for(i = 0; i < (int) edges.size(); i++){
+
+        //default
+        key = 10000000;
+        int opposite = 1000000;
+
+        //get the key (smaller vertex index) and assign the bigger vertex index to opposite
+        if (edges[i].v[0] < edges[i].v[1]){
+            key = edges[i].v[0];
+            opposite = edges[i].v[1];
+        }
+        else if (edges[i].v[0] >= edges[i].v[1]){
+            key = edges[i].v[1];
+            opposite = edges[i].v[0];
+            if (edges[i].v[0] == edges[i].v[1]){
+                counter++;
+            }
+        }
+
+        // key not in map
+        if(edgelookup.find(key) == edgelookup.end()) {
+            //if we did not find the key, we add a new index inot the hash map
+            std::vector<int> temp;
+            //init the counter to 0
+            temp.push_back(0);
+            //push on the bigger vertex
+            temp.push_back(opposite);
+            //assign data
+            edgelookup[key] = temp;
+            //push edge
+            cleanEdges.push_back(edges[i]);
+        }
+        else        {
+            //if we do find the entry
+            //we check through the vector to see if the acomplice vertex has been added
+            std::vector<int>::iterator start = edgelookup[key].begin();
+            std::vector<int>::iterator end = edgelookup[key].end();
+            bool found = false;
+            //for counter
+            start++;
+            int count1 = 1;
+            while (start != end){
+                //if we do find it, we break as it is already added, thus a duplciate edge
+                if (*start == opposite){
+
+
+                    //CHECKING HOW MANY DUPLCIATE EDGES THERE ARE
+                    hitcount++;
+                    found = true;
+                    break;
+                }
+                start++;
+                count1++;
+            }
+
+            //if it is not found, we add a new entry, meaning we have a new destination for a source vertex that already exists
+            if (!found){
+                //push new bigger key
+                edgelookup[key].push_back(opposite);
+                //push the edge's winding
+                companion[key].push_back(edges[i].v[0]);
+                cleanEdges.push_back(edges[i]);
+            }
+        }
+    }
+
+    cerr << "Broken edges found: " << counter << std::endl;
+    cerr << "Duplicate edges found = " << hitcount << " of " << (int) edges.size() << endl;
+    cerr << "Clean edges = " << (int) cleanEdges.size() << endl;
+
+    no_edges_clean = cleanEdges.size();
+    no_edges_dirty = edges.size();
+
+    edges.clear();
+    edges = cleanEdges;
+*/
+}
+
+
+
+
 
 bool Mesh::readSTL(string filename)
 {

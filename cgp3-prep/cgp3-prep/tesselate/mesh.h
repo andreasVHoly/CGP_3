@@ -55,7 +55,7 @@ public:
     /**
      * Test whether a point falls inside the shape. Will need to be overridden by each inheriting class.
      * @param pnt   point to test for containment
-     * @retval true if the point falls within the shape, 
+     * @retval true if the point falls within the shape,
      * @retval false otherwise
      */
     virtual bool pointContainment(cgp::Point pnt)=0;
@@ -146,7 +146,7 @@ public:
     /**
      * Test whether a point falls inside the cylinder
      * @param pnt   point to test for containment
-     * @retval true if the point falls within the sphere, 
+     * @retval true if the point falls within the sphere,
      * @retval false otherwise
      */
     bool pointContainment(cgp::Point pnt);
@@ -166,6 +166,10 @@ private:
     cgp::Vector trx;                 ///< translation
     float xrot, yrot, zrot;     ///< rotation angles about x, y, and z axes
     std::vector<Sphere> boundspheres; ///< bounding sphere accel structure
+    std::vector<Edge> edges;
+    std::unordered_map<int, vector<int>> edgelookup;
+    std::unordered_map<int, vector<int>> adjList;
+
 
     /**
      * Search list of vertices to find matching point
@@ -232,6 +236,10 @@ private:
      */
     void buildSphereAccel(int maxspheres);
 
+
+    void hashEdgeSort();
+    void buildAdjList();
+
 public:
 
     ShapeGeometry geometry;         ///< renderable version of mesh
@@ -288,7 +296,7 @@ public:
     /**
      * Test whether a point falls inside the mesh using ray-mesh intersection tests
      * @param pnt   point to test for containment
-     * @retval true if the point falls within the mesh, 
+     * @retval true if the point falls within the mesh,
      * @retval false otherwise
      */
     bool pointContainment(cgp::Point pnt);

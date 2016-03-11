@@ -230,10 +230,6 @@ cgp::Point VoxelVolume::getVoxelPosAtPoint(int x, int y, int z, cgp::Point point
 
 int VoxelVolume::getMCVertIdx(int x, int y, int z)
 {
-    // stub, needs completing
-    //TODO
-    // refer to data structures at the top of voxels.cpp and mesh.cpp
-
     //we create a int to hold the 8 positions either being on or off
     int structure = 0;
     //go through the int
@@ -243,8 +239,6 @@ int VoxelVolume::getMCVertIdx(int x, int y, int z)
             structure |= 1 << i;
         }
     }
-
-
     return structure;
 }
 
