@@ -909,10 +909,10 @@ void Mesh::marchingCubes(VoxelVolume vox)
                 int result = vox.getMCEdgeIdx(caseInt);
 
 
-                if (result == 0){
+                /*if (result == 0){
                     //cout << "entirely outside" << endl;
                     continue;
-                }
+                }*/
 
                 //Find the vertices where the surface intersects the cube
                 for (int i = 0; i < 12; i++){
