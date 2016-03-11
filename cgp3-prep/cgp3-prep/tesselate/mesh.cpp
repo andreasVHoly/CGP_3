@@ -1003,7 +1003,7 @@ void Mesh::applyFFD(ffd * lat)
 {
     //TODO
     // stub, needs completing
-    lat->reset();
+    
 }
 
 
