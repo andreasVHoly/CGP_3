@@ -227,16 +227,15 @@ void ffd::setCP(int i, int j, int k, cgp::Point pnt)
 
 void ffd::deform(cgp::Point & pnt)
 {
-    // stub, needs completing
-    //TODO
-    //convert into stu format
-
+    //create S,T,U vectors from diagonal
     cgp::Vector S(diagonal.i,0.0,0.0);
     cgp::Vector T(0.0,diagonal.j,0.0);
     cgp::Vector U(0.0,0.0,diagonal.k);
 
+    //init
     float s = 0, t = 0, u = 0;
 
+    //create cross product vectors for parts of the s t u calcualtions
     cgp::Vector TxU;
     TxU.cross(T,U);
     cgp::Vector SxU;
@@ -244,51 +243,57 @@ void ffd::deform(cgp::Point & pnt)
     cgp::Vector SxT;
     SxT.cross(S,T);
 
+    //create difference of point and origin
     cgp::Vector xXo( pnt.x - origin.x, pnt.y - origin.y, pnt.z - origin.z);
 
+    //temps
     float s1=0,s2=0,t1=0,t2=0,u1=0,u2=0;
 
-    cgp::Vector topS;
-    s1 = topS.dot(TxU,xXo);
-    cgp::Vector botS;
-    s2 = botU.dot(TxU,S);
+    //dot product for s top
+    s1 = TxU.dot(xXo);
+    //dot product for s bottom
+    s2 = TxU.dot(S);
 
-    cgp::Vector topT;
-    t1 = topS.dot(SxU,xXo);
-    cgp::Vector botT;
-    t2 = botU.dot(SxU,T);
+    //dot product for t top
+    t1 = SxU.dot(xXo);
+    //dot product for t bottom
+    t2 = SxU.dot(T);
 
-    cgp::Vector topU;
-    u1 = topS.dot(SxT,xXo);
-    cgp::Vector botU;
-    u2 = botU.dot(SxT,U);
+    //dot product for u top
+    u1 = SxT.dot(xXo);
+    //dot product for u bottom
+    u2 = SxT.dot(U);
 
-
+    //calculate s,t,u
     s = s1/s2;
     t = t1/t2;
     u = u1/u2;
 
 
-    //get xffd
-    float ansS, ansT, ansU;
-    float l = dmix-1, m = dimy-1, n = dimz-1;
+    //get xffd elements s,t,u
+    float ansS = 0, ansT = 0, ansU = 0;
+    float l = dimx-1, m = dimy-1, n = dimz-1;
     //s
     for (int i = 0; i < l; i++){
-        ansS += (1-s);
+        ansS += nChoosek(l,i) * pow((1-s),l-i) * pow(s,i);
     }
     //t
     for (int j = 0; j < m; j++){
-
+        ansT += nChoosek(m,j) * pow((1-t),m-j) * pow(t,j);
     }
     //u
     for (int k = 0; k < n; k++){
-
+        ansU += nChoosek(n,k) * pow((1-u),n-k) * pow(u,k);
     }
 
+    //set point to new coordinates
+    pnt.x = ansS;
+    pnt.y = ansT;
+    pnt.z = ansU;
 
 }
 
-    unsigned nChoosek( unsigned n, unsigned k )
+unsigned int ffd::nChoosek( unsigned n, unsigned k )
 {
     if (k > n) return 0;
     if (k * 2 > n) k = n-k;

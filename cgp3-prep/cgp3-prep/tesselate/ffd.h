@@ -42,6 +42,8 @@ private:
 
 public:
 
+    uint nChoosek( unsigned n, unsigned k );
+
     ShapeGeometry geom;         ///< renderable version of non-active lattice
     ShapeGeometry activegeom;   ///< renderable version of active lattice (selected control points)
 

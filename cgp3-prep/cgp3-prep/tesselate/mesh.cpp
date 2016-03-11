@@ -1002,8 +1002,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
 void Mesh::applyFFD(ffd * lat)
 {
     //TODO
-    // stub, needs completing
-    
+
 }
 
 
