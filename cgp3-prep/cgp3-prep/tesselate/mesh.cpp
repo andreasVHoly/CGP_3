@@ -951,9 +951,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
     mergeVerts();
 
     //switching these 2 around we get div by 0 error
-    deriveVertNorms();
-    deriveFaceNorms();
 
+    deriveFaceNorms();
+    deriveVertNorms();
 }
 
 void Mesh::laplacianSmooth(int iter, float rate)
