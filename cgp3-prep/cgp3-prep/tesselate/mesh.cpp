@@ -969,26 +969,30 @@ void Mesh::laplacianSmooth(int iter, float rate)
     int key = 0;
 
 
+    for (int it = 0; it < iter; it++){
+        for(auto i = adjList.begin(); i != adjList.end(); i++){
 
-    for(auto i = adjList.begin(); i != adjList.end(); i++){
+            //vi = vi + L * sum(wij (vj - vi))
 
-        //vi = vi + L * sum(wij (vj - vi))
+            float totalX = 0, totalY = 0, totalZ = 0;
 
-        float totalX = 0, totalY = 0, totalZ = 0;
-        int size = i->second.size();
-        int weight = 1/size;
-        for (int h = 0; h < size; h++){
-            //get the adjcent vertex
-            totalX += weight*(verts[i->second[h]].x - verts[key].x);
-            totalY += weight*(verts[i->second[h]].y - verts[key].y);
-            totalZ += weight*(verts[i->second[h]].z - verts[key].z);
+            int size = i->second.size();
+            float weight = 1/(float)size;
+
+            for (int h = 0; h < size; h++){
+                //get the adjcent vertex
+                totalX += weight*(verts[i->second[h]].x - verts[key].x);
+                totalY += weight*(verts[i->second[h]].y - verts[key].y);
+                totalZ += weight*(verts[i->second[h]].z - verts[key].z);
+            }
+
+            verts[key].x += rate * totalX;
+            verts[key].y += rate * totalY;
+            verts[key].z += rate * totalZ;
+            key++;
         }
-
-        verts[key].x += rate * totalX;
-        verts[key].y += rate * totalY;
-        verts[key].z += rate * totalZ;
-        key++;
     }
+
 
     mergeVerts();
     deriveFaceNorms();
