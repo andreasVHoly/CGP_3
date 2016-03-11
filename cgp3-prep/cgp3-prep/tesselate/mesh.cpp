@@ -977,7 +977,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
             float totalX = 0, totalY = 0, totalZ = 0;
 
             int size = i->second.size();
-            float weight = 1/(float)size;
+            float weight = 1.0/(float)size;
 
             for (int h = 0; h < size; h++){
                 //get the adjcent vertex
@@ -986,9 +986,9 @@ void Mesh::laplacianSmooth(int iter, float rate)
                 totalZ += weight*(verts[i->second[h]].z - verts[key].z);
             }
 
-            verts[key].x += rate * totalX;
-            verts[key].y += rate * totalY;
-            verts[key].z += rate * totalZ;
+            verts[key].x = verts[key].x + rate * totalX;
+            verts[key].y = verts[key].y + rate * totalY;
+            verts[key].z = verts[key].z + rate * totalZ;
             key++;
         }
     }
