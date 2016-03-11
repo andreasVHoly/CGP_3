@@ -78,12 +78,12 @@ void ffd::reset()
 {
     //we get 3x3x3
 
-    for (int x = 0; x < dimx; x++){
-        for (int y = 0; y < dimy; y++){
-            for (int z = 0; z < dimz; z++){
-                float distX = origin.x + x * diagonal.i/dimx;
-                float distY = origin.y + y * diagonal.j/dimy;
-                float distZ = origin.z + z * diagonal.k/dimz;
+    for (int x = 0; x < dimx-1; x++){
+        for (int y = 0; y < dimy-1; y++){
+            for (int z = 0; z < dimz-1; z++){
+                float distX = origin.x + x * diagonal.i/dimx-1;
+                float distY = origin.y + y * diagonal.j/dimy-1;
+                float distZ = origin.z + z * diagonal.k/dimz-1;
                 cgp::Point point(distX,distY,distZ);
 
                 setCP(x,y,z,point);
