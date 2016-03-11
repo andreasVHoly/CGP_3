@@ -909,10 +909,10 @@ void Mesh::marchingCubes(VoxelVolume vox)
                 int result = vox.getMCEdgeIdx(caseInt);
 
 
-                /*if (result == 0){
+                if (result == 0){
                     //cout << "entirely outside" << endl;
                     continue;
-                }*/
+                }
 
                 //Find the vertices where the surface intersects the cube
                 for (int i = 0; i < 12; i++){
@@ -922,7 +922,6 @@ void Mesh::marchingCubes(VoxelVolume vox)
                             offset = vox.getMCEdgeXsect(i);
                             cgp::Point orig = vox.getVoxelPos(x,y,z);
                             asEdgeVertex[i] = vox.getVoxelPosAtPoint(offset.x, offset.y, offset.z, orig);
-
                     }
                 }
                 //Draw the triangles that were found.  There can be up to five per cube
@@ -933,21 +932,17 @@ void Mesh::marchingCubes(VoxelVolume vox)
                         }
 
                         Triangle tempTri;
-                        for(int k = 2; k >= 0; k--)
-                        //for(int k = 0; k < 3; k++)
+                        //for(int k = 2; k >= 0; k--)
+                        for(int k = 0; k < 3; k++)
                         {
                                 ivertex = triangleTable[caseInt][3*j+k];
                                 //pushes corner
                                 verts.push_back(asEdgeVertex[ivertex]);
                                 //gets the last element
                                 tempTri.v[k] = verts.size()-1;
-
                         }
                         tris.push_back(tempTri);
                 }
-
-
-
             }
         }
     }
