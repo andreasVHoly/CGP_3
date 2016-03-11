@@ -927,21 +927,21 @@ void Mesh::marchingCubes(VoxelVolume vox)
                 //Draw the triangles that were found.  There can be up to five per cube
                 for(int j = 0; j < 5; j++)
                 {
-                        if(triangleTable[caseInt][3*j] < 0){
-                            break;
-                        }
+                    if (triangleTable[caseInt][3*j] < 0){
+                        break;
+                    }
 
-                        Triangle tempTri;
-                        //for(int k = 2; k >= 0; k--)
-                        for(int k = 0; k < 3; k++)
-                        {
-                                ivertex = triangleTable[caseInt][3*j+k];
-                                //pushes corner
-                                verts.push_back(asEdgeVertex[ivertex]);
-                                //gets the last element
-                                tempTri.v[k] = verts.size()-1;
-                        }
-                        tris.push_back(tempTri);
+                    Triangle tempTri;
+                    //for(int k = 2; k >= 0; k--)
+                    for(int k = 0; k < 3; k++)
+                    {
+                            ivertex = triangleTable[caseInt][3*j+k];
+                            //pushes corner
+                            verts.push_back(asEdgeVertex[ivertex]);
+                            //gets the last element
+                            tempTri.v[k] = verts.size()-1;
+                    }
+                    tris.push_back(tempTri);
                 }
             }
         }
@@ -949,8 +949,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 
     mergeVerts();
-    deriveFaceNorms();
     deriveVertNorms();
+    deriveFaceNorms();
+
 
 }
 
