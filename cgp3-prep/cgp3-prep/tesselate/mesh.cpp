@@ -924,17 +924,11 @@ void Mesh::marchingCubes(VoxelVolume vox)
                             offset = vox.getMCEdgeXsect(i);
 
                             //void getFrame(cgp::Point &corner, cgp::Vector &diag);
-                            cgp::Point corner;
-                            cgp::Vector diag;
-                            vox.getFrame(corner,diag);
 
-                            float px, py, pz;
 
-                            px = (float) x / (float) (xDim-1);
-                            py = (float) y / (float) (yDim-1);
-                            pz = (float) z / (float) (zDim-1);
+                            cgp::Point orig = vox.getVoxelPos(x,y,z);
 
-                            asEdgeVertex[i] = vox.getVoxelPosAtPoint(x, y, z, offset);
+                            asEdgeVertex[i] = vox.getVoxelPosAtPoint(offset.x, offset.y, offset.z, orig);
 
                     }
                 }
