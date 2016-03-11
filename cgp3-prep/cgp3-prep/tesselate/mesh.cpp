@@ -994,7 +994,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
     }
 
 
-    //mergeVerts();
+    mergeVerts();
     deriveFaceNorms();
     deriveVertNorms();
 }
