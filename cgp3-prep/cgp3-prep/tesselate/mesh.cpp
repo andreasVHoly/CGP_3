@@ -900,7 +900,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
     cgp::Point offset;
     int vertlist[12];
     cgp::Point asEdgeVertex[12];
-
+    int count = 0;
     for (int x = 0; x < xDim-1; x++){
         for (int y = 0; y < yDim-1; y++){
             for (int z = 0; z < zDim-1; z++){
@@ -911,7 +911,8 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
                 if (result == 0){
                     //cout << "entirely outside" << endl;
-                    //continue;//breaks
+                    count++;
+                    continue;//breaks
                 }
 
                 //Find the vertices where the surface intersects the cube
@@ -947,7 +948,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
         }
     }
 
-
+    cout << count << endl;
     mergeVerts();
 
     //switching these 2 around we get div by 0 error
