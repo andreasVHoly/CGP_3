@@ -227,9 +227,9 @@ cgp::Point VoxelVolume::getVoxelPosAtPoint(int x, int y, int z, cgp::Point point
     /*px = (float) x / (float) (xdim-1);
     py = (float) y / (float) (ydim-1);
     pz = (float) z / (float) (zdim-1);*/
-    cout << xdim-1 <<" " << ydim-1 <<" "<< zdim-1<<endl;
+    //cout << xdim-1 <<" " << ydim-1 <<" "<< zdim-1<<endl;
     //pnt = cgp::Point(point.x + px * diagonal.i, point.y + py * diagonal.j, point.z + pz * diagonal.k); // convert from voxel space to world coordinates
-    pnt = cgp::Point(point.x + px * diagonal.i/(xdim-1), point.y + py * diagonal.j/(ydim-1), point.z + pz * diagonal.k/(zdim-1));
+    pnt = cgp::Point(point.x + x * diagonal.i/(xdim-1), point.y + y * diagonal.j/(ydim-1), point.z + z * diagonal.k/(zdim-1));
     return pnt;
 }
 
