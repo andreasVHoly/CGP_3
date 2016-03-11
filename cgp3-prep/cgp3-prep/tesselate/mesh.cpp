@@ -994,7 +994,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
     }
 
 
-    mergeVerts();
+    //mergeVerts();
     deriveFaceNorms();
     deriveVertNorms();
 }
@@ -1007,7 +1007,7 @@ void Mesh::applyFFD(ffd * lat)
 
 
 void Mesh::buildAdjList(){
-
+    cout << tris.size() << endl;
     adjList.clear();
     for (int i = 0; i < tris.size(); i++){
         adjList[tris[i].v[0]].push_back(tris[i].v[1]);
