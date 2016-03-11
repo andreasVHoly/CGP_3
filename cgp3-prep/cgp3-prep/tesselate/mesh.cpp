@@ -911,7 +911,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
                 if (result == 0){
                     //cout << "entirely outside" << endl;
-                    count++;
+                    //count++;
                     continue;//breaks
                 }
 

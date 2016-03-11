@@ -239,7 +239,7 @@ int VoxelVolume::getMCVertIdx(int x, int y, int z)
     //go through the int
     for (int i = 0; i < 8; i++){
         //get the point of each of the 8 edges based on the calculation values in the cubePos
-        if (get( (x + cubePos[i][0]) , (y + cubePos[i][1]) , (z + cubePos[i][2]) )){
+        if (!get( (x + cubePos[i][0]) , (y + cubePos[i][1]) , (z + cubePos[i][2]) )){
             structure |= 1 << i;
         }
     }
