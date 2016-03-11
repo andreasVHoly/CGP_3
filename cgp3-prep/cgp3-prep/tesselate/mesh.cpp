@@ -911,7 +911,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
                 if (result == 0){
                     //cout << "entirely outside" << endl;
-                    return;
+                    continue;
                 }
 
                 //Find the vertices where the surface intersects the cube
