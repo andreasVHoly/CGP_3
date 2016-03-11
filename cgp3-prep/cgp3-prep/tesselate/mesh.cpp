@@ -911,7 +911,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
                 if (result == 0){
                     //cout << "entirely outside" << endl;
-                    continue;
+                    //continue;//breaks
                 }
 
                 //Find the vertices where the surface intersects the cube
@@ -949,9 +949,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 
     mergeVerts();
-    deriveVertNorms();
-    deriveFaceNorms();
 
+    deriveFaceNorms();//switching these 2 around we get div by 0 error
+    deriveVertNorms();
 
 }
 
