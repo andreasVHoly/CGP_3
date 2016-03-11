@@ -950,8 +950,9 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
     mergeVerts();
 
-    deriveFaceNorms();//switching these 2 around we get div by 0 error
+    //switching these 2 around we get div by 0 error
     deriveVertNorms();
+    deriveFaceNorms();
 
 }
 
