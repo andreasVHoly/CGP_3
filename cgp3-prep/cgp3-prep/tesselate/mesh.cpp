@@ -996,14 +996,13 @@ void Mesh::laplacianSmooth(int iter, float rate)
 void Mesh::applyFFD(ffd * lat)
 {
     cout << "applying ffd" << endl;
-    int xDim, yDim, zDim;
-    lat->getDim(xDim,yDim,zDim);
     for (int x = 0; x < verts.size(); x++){
         lat->deform(verts[x]);
     }
-    mergeVerts();
-    deriveFaceNorms();
-    deriveVertNorms();
+
+    //mergeVerts();
+    //deriveFaceNorms();
+    //deriveVertNorms();
     cout << "done" << endl;
 }
 

@@ -273,8 +273,26 @@ void ffd::deform(cgp::Point & pnt)
     //get xffd elements s,t,u
     float ansS = 0, ansT = 0, ansU = 0;
     float l = dimx-1, m = dimy-1, n = dimz-1;
-    //s
+    cgp::Vector final;
     for (int i = 0; i < l; i++){
+        for (int j = 0; j < m; j++){
+            for (int k = 0; k < n; k++){
+                //get control point ijk
+                cgp::Point cp = getCP(i,j,k);
+                //convert to a vector
+                cgp::Vector cpVec(cp.x - origin.x, cp.y - origin.y, cp.z - origin.z);
+                float value =   (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i) *
+                                (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j) *
+                                (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
+                cpVec.mult(value);
+                final.add(cpVec);
+            }
+        }
+    }
+
+
+    //s
+    /*for (int i = 0; i < l; i++){
         ansS += nChoosek(l,i) * pow((1-s),l-i) * pow(s,i);
     }
     //t
@@ -285,11 +303,11 @@ void ffd::deform(cgp::Point & pnt)
     for (int k = 0; k < n; k++){
         ansU += nChoosek(n,k) * pow((1-u),n-k) * pow(u,k);
     }
-
+*/
     //set point to new coordinates
-    pnt.x = ansS;
-    pnt.y = ansT;
-    pnt.z = ansU;
+    pnt.x = final.i;
+    pnt.y = final.j;
+    pnt.z = final.k;
 
 }
 
