@@ -295,9 +295,18 @@ void ffd::deform(cgp::Point & pnt)
                 cpVec.i = cp.x - origin.x;
                 cpVec.j = cp.y - origin.y;
                 cpVec.k = cp.z - origin.z;
+                cout << "value " << value << endl;
 
-                cpVec.mult(value);
-                ans1.add(cpVec);
+                cpVec.i *= value;
+                cpVec.j *= value;
+                cpVec.k *= value;
+                //cpVec.mult(value);
+                //ans1.add(cpVec);
+
+                ans1.i += cpVec.i;
+                ans1.j += cpVec.j;
+                ans1.k += cpVec.k;
+
             }
         }
     }
@@ -343,11 +352,11 @@ void ffd::deform(cgp::Point & pnt)
     }*/
 
 
-    cout << "move x: " << finalAns.i << ", move y: " << finalAns.j << ", move z: " << finalAns.k << endl ;
+    cout << "move x: " << ans1.i << ", move y: " << ans1.j << ", move z: " << ans1.k << endl ;
     //set point to new coordinates
-    pnt.x += finalAns.i;
-    pnt.y += finalAns.j;
-    pnt.z += finalAns.k;
+    pnt.x = ans1.i;
+    pnt.y = ans1.j;
+    pnt.z = ans1.k;
 
 }
 
