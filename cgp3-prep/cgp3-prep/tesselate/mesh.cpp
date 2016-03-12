@@ -950,8 +950,6 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 
     mergeVerts();
-    //switching these 2 around we get div by 0 error
-
     deriveFaceNorms();
     deriveVertNorms();
 }
@@ -964,10 +962,6 @@ void Mesh::laplacianSmooth(int iter, float rate)
     //sort the edges - shouldnt do this
     //hashEdgeSort();
     buildAdjList();
-
-
-
-
 
     for (int it = 0; it < iter; it++){
         for(auto i = adjList.begin(); i != adjList.end(); i++){
@@ -1001,16 +995,16 @@ void Mesh::laplacianSmooth(int iter, float rate)
 
 void Mesh::applyFFD(ffd * lat)
 {
+    cout << "applying ffd" << endl;
     int xDim, yDim, zDim;
     lat->getDim(xDim,yDim,zDim);
-    for (int x = 0; x < xDim-1; x++){
-        for (int y = 0; y < yDim-1; y++){
-            for (int z = 0; z < zDim-1; z++){
-                cgp::Point pnt(x,y,z);
-                lat->deform(pnt);
-            }
-        }
+    for (int x = 0; x < verts.size(); x++){
+        lat->deform(verts[x]);
     }
+    mergeVerts();
+    deriveFaceNorms();
+    deriveVertNorms();
+    cout << "done" << endl;
 }
 
 
