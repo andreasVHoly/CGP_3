@@ -1001,8 +1001,16 @@ void Mesh::laplacianSmooth(int iter, float rate)
 
 void Mesh::applyFFD(ffd * lat)
 {
-    //TODO
-
+    int xDim, yDim, zDim;
+    lat->getDim(xDim,yDim,zDim);
+    for (int x = 0; x < xDim-1; x++){
+        for (int y = 0; y < yDim-1; y++){
+            for (int z = 0; z < zDim-1; z++){
+                cgp::Point pnt(x,y,z);
+                lat->deform(pnt);
+            }
+        }
+    }
 }
 
 
