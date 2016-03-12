@@ -898,7 +898,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
     int ivertex = 0;
     vox.getDim(xDim,yDim,zDim);
     cgp::Point offset;
-    int vertlist[12];
+
     cgp::Point asEdgeVertex[12];
     int count = 0;
     for (int x = 0; x < xDim-1; x++){
