@@ -231,7 +231,7 @@ void ffd::deform(cgp::Point & pnt)
     cgp::Vector S(diagonal.i,0.0,0.0);
     cgp::Vector T(0.0,diagonal.j,0.0);
     cgp::Vector U(0.0,0.0,diagonal.k);
-
+    cout << "diag " << diagonal.i << " , " << diagonal.j << " , " << diagonal.k << endl;
     //init
     float s = 0, t = 0, u = 0;
 

@@ -956,8 +956,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 void Mesh::laplacianSmooth(int iter, float rate)
 {
-    //populate the edges vector
-    edges.clear();
+
 
     //sort the edges - shouldnt do this
     //hashEdgeSort();
