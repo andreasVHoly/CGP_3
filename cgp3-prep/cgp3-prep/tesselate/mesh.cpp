@@ -1001,8 +1001,8 @@ void Mesh::applyFFD(ffd * lat)
     }
 
     //mergeVerts();
-    deriveFaceNorms();
-    deriveVertNorms();
+    //deriveFaceNorms();
+    //deriveVertNorms();
     cout << "done" << endl;
 }
 

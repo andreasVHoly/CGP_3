@@ -284,6 +284,26 @@ void ffd::deform(cgp::Point & pnt)
 
 
     for (int i = 0; i < l; i++){
+        for (int j = 0; j < m; j++){
+            for (int k = 0; k < n; k++){
+                float value = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k) *
+                (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j) *
+                (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i);
+
+                cgp::Point cp = getCP(i,j,k);
+                //convert to a vector
+                cpVec.i = cp.x - origin.x;
+                cpVec.j = cp.y - origin.y;
+                cpVec.k = cp.z - origin.z;
+
+                cpVec.mult(value);
+                ans1.add(cpVec);
+            }
+        }
+    }
+
+
+    /*for (int i = 0; i < l; i++){
         //init
         ans1.i = 0;
         ans1.j = 0;
@@ -312,17 +332,18 @@ void ffd::deform(cgp::Point & pnt)
             ans2.mult((float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j));
             ans2.mult(cpVec);
             add2.add(ans2);
+            cout << "add x: " << add2.i << ", add y: " << add2.j << ", add z: " << add2.k << endl ;
         }
         //multiplay inner answer and add
         ans1.mult(add2);
         ans1.mult((float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i));
-
+        cout << "mult x: " << ans1.i << ", mult y: " << ans1.j << ", mult z: " << ans1.k << endl ;
         finalAns.add(ans1);
 
-    }
+    }*/
 
 
-
+    cout << "move x: " << finalAns.i << ", move y: " << finalAns.j << ", move z: " << finalAns.k << endl ;
     //set point to new coordinates
     pnt.x += finalAns.i;
     pnt.y += finalAns.j;
