@@ -297,8 +297,6 @@ void ffd::deform(cgp::Point & pnt)
     }
 
     pnt = addX;
-
-
 }
 
 float ffd::nChoosek( float n, float k )
