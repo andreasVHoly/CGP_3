@@ -264,35 +264,31 @@ void ffd::deform(cgp::Point & pnt)
     u2 = SxT.dot(U);
 
     //calculate s,t,u
-    s = s1/s2;
-    t = t1/t2;
-    u = u1/u2;
+    s = (float)s1/(float)s2;
+    t = (float)t1/(float)t2;
+    u = (float)u1/(float)u2;
 
     //get xffd elements s,t,u
 
-    //float l = dimx, m = dimy, n = dimz;
     float l = dimx-1, m = dimy-1, n = dimz-1;
 
-    
+
     cgp::Point addX(0,0,0);
-    for (int i = 0; i < l; i++){
+    for (int i = 0; i < dimx; i++){
         cgp::Point addY(0,0,0);
-        for (int j = 0; j < m; j++){
+        for (int j = 0; j < dimy; j++){
             cgp::Point addZ(0,0,0);
-            for (int k = 0; k < n; k++){
+            for (int k = 0; k < dimz; k++){
                 cgp::Point cp = getCP(i,j,k);
                 float valueK = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
                 addZ.x += valueK * cp.x;
                 addZ.y += valueK * cp.y;
                 addZ.z += valueK * cp.z;
-
             }
             float valueJ = (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j);
             addY.x += valueJ * addZ.x;
             addY.y += valueJ * addZ.y;
             addY.z += valueJ * addZ.z;
-
-
         }
         float valueI = (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i);
         addX.x += valueI * addY.x;
@@ -300,9 +296,8 @@ void ffd::deform(cgp::Point & pnt)
         addX.z += valueI * addY.z;
     }
 
-    pnt.x = addX.x;
-    pnt.y = addX.y;
-    pnt.z = addX.z;
+    pnt = addX;
+
 
 }
 
