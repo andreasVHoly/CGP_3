@@ -166,8 +166,6 @@ private:
     cgp::Vector trx;                 ///< translation
     float xrot, yrot, zrot;     ///< rotation angles about x, y, and z axes
     std::vector<Sphere> boundspheres; ///< bounding sphere accel structure
-    std::vector<Edge> edges;
-    std::unordered_map<int, vector<int>> edgelookup;
     std::unordered_map<int, vector<int>> adjList;
 
 
@@ -311,7 +309,7 @@ public:
      * Apply marching cubes to a voxel volume to generate a mesh
      * (Required to shoehorn Bloyd's code into current framework - see http://paulbourke.net/geometry/polygonise/marchingsource.cpp)
      * @param vox           voxel volume
-     
+
      */
     void marchingCubes(VoxelVolume vox);
 
@@ -384,6 +382,10 @@ public:
      * Build a simple tetrahedron that has a double shell breaking 2-manifold validity
      */
     void overlapTetTest();
+
+
+    bool checkAdjList();
+    bool setUpSmoothTest();
 };
 
 #endif

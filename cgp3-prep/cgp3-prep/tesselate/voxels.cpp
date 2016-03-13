@@ -215,6 +215,7 @@ cgp::Point VoxelVolume::getVoxelPos(int x, int y, int z)
 
 cgp::Point VoxelVolume::getVoxelPosAtPoint(int x, int y, int z, cgp::Point point)
 {
+    //calculates the world pos based on a defined origin
     cgp::Point pnt;
     cgp::Vector halfcell;
     float px, py, pz;
@@ -224,7 +225,6 @@ cgp::Point VoxelVolume::getVoxelPosAtPoint(int x, int y, int z, cgp::Point point
     pz = (float) z / (float) (zdim-1);
 
     pnt = cgp::Point(point.x + px * diagonal.i, point.y + py * diagonal.j, point.z + pz * diagonal.k); // convert from voxel space to world coordinates
-    //pnt = cgp::Point(point.x + x * diagonal.i/(xdim-1), point.y + y * diagonal.j/(ydim-1), point.z + z * diagonal.k/(zdim-1));
     return pnt;
 }
 

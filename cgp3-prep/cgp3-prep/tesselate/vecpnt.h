@@ -48,6 +48,13 @@ public:
 
     float x, y, z;
 
+    //own method to reset point to 0,0,0
+    inline void reset(){
+        x = 0.0;
+        y = 0.0;
+        z = 0.0;
+    }
+
     /// default constructor, sets point to origin
     inline Point()
     { x = 0.0;

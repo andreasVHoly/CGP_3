@@ -64,7 +64,7 @@ public:
     /**
      * Reset all control points to their initial underformed positions. These are chosen to ensure that, by
      * linear precision, no deformation happens even if deform is called. In other words, the identity deformation.
-     * @todo ffd::reset to be completed for CGP Assignment3
+
      */
     void reset();
 
@@ -138,7 +138,7 @@ public:
     /**
      * Apply free-form deformation to a point by embedding it in an undistorted lattice and then applying the deformation indicated by new control point positions
      * @param[out] pnt  Point undergoing deformation
-     * @todo ffd::deform to be completed for CGP Assignment3
+     
      */
     void deform(cgp::Point & pnt);
 };

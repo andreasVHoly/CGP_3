@@ -20,6 +20,20 @@ void TestMesh::tearDown()
     delete mesh;
 }
 
+void TestMesh::testSmoothing(){
+    cout << "\t...TESTING SMOOTHING METHOD..." << endl;
+    CPPUNIT_ASSERT(mesh->setUpSmoothTest());
+    cout << "\t...TESTED SMOOTHING METHOD..." << endl;
+}
+
+void TestMesh::testAdjList(){
+    cout << "\t...TESTING ADJ METHOD..." << endl;
+    CPPUNIT_ASSERT(mesh->checkAdjList());
+    cout << "\t...TESTED ADJ METHOD..." << endl;
+}
+
+
+
 void TestMesh::testMeshing()
 {
 

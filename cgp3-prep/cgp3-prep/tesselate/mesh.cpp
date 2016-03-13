@@ -933,7 +933,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
                     }
 
                     Triangle tempTri;
-                    //for(int k = 2; k >= 0; k--)
+                    //create the vertices
                     for(int k = 0; k < 3; k++)
                     {
                             ivertex = triangleTable[caseInt][3*j+k];
@@ -942,6 +942,7 @@ void Mesh::marchingCubes(VoxelVolume vox)
                             //gets the last element
                             tempTri.v[k] = verts.size()-1;
                     }
+                    //push back the new triangle
                     tris.push_back(tempTri);
                 }
             }
@@ -956,59 +957,58 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 void Mesh::laplacianSmooth(int iter, float rate)
 {
-
-
-    //sort the edges - shouldnt do this
-    //hashEdgeSort();
+    //build the adjacency list
     buildAdjList();
-
+    cout << adjList.size() << endl;
+    //run it for iter amount of iterations
     for (int it = 0; it < iter; it++){
+        //loop through the adjacency list
         for(auto i = adjList.begin(); i != adjList.end(); i++){
+
 
             //vi = vi + L * sum(wij (vj - vi))
 
             float totalX = 0, totalY = 0, totalZ = 0;
 
             int size = i->second.size();
+
+            //calculate the weight in the equation
             float weight = 1.0/(float)size;
 
             for (int h = 0; h < size; h++){
-                //get the adjcent vertex
+                //get the adjcent vertex and cal the difference between them on each x,y,z
                 totalX += weight*(verts[i->second[h]].x - verts[i->first].x);
                 totalY += weight*(verts[i->second[h]].y - verts[i->first].y);
                 totalZ += weight*(verts[i->second[h]].z - verts[i->first].z);
             }
-
+            //multiply the sum by the rate we get
+            cout << "totals" << endl;
+            cout << totalX<< endl;
+            cout << totalY<< endl;cout << totalZ<< endl;
             verts[i->first].x = verts[i->first].x + rate * totalX;
             verts[i->first].y = verts[i->first].y + rate * totalY;
             verts[i->first].z = verts[i->first].z + rate * totalZ;
 
         }
     }
-
-
-    //mergeVerts();
+    //recalculate the normals
     deriveFaceNorms();
     deriveVertNorms();
 }
 
 void Mesh::applyFFD(ffd * lat)
 {
-    cout << "applying ffd" << endl;
+    //we loop through all vertices and apply the deformation based on the control points
+
     for (int x = 0; x < verts.size(); x++){
         lat->deform(verts[x]);
     }
-
-    //mergeVerts();
-    //deriveFaceNorms();
-    //deriveVertNorms();
-    cout << "done" << endl;
 }
 
 
 void Mesh::buildAdjList(){
-    cout << tris.size() << endl;
     adjList.clear();
+    //loop through the triangle list and construct the adjacency hash
     for (int i = 0; i < tris.size(); i++){
         adjList[tris[i].v[0]].push_back(tris[i].v[1]);
         adjList[tris[i].v[1]].push_back(tris[i].v[2]);
@@ -1594,4 +1594,84 @@ bool Mesh::manifoldValidity()
     // each other for intersection. This would require a spatial data structure such as a bounding sphere hierarchy to accelerate properly
     // which is beyond the scope of this assignment
     return true;
+}
+
+bool Mesh::checkAdjList(){
+    verts.clear();
+    //create triangle verts
+    verts.push_back(cgp::Point(0,0,0));
+    verts.push_back(cgp::Point(1,1,1));
+    verts.push_back(cgp::Point(-1,1,1));
+
+    //assign edges
+    Triangle tri;
+    tri.v[0] = 0;
+    tri.v[1] = 1;
+    tri.v[2] = 2;
+
+    tris.clear();
+    tris.push_back(tri);
+    //build adj list
+    buildAdjList();
+
+    for(auto i = adjList.begin(); i != adjList.end(); i++){
+        if (!i->second.size() == 2){
+            return false;
+        }
+    }
+
+
+
+    //vert 1 adj
+    if (!adjList[0][0] == 1 || !adjList[0][1] == 2) {return false;}
+    //vert 2 adj
+    if (!adjList[1][0] == 0 || !adjList[1][1] == 2) {return false;}
+    //vert 3 adj
+    if (!adjList[2][0] == 1 || !adjList[2][1] == 0) {return false;}
+
+    return true;
+}
+
+
+bool Mesh::setUpSmoothTest(){
+    verts.clear();
+    //create triangle verts
+    verts.push_back(cgp::Point(0,0,0));
+    verts.push_back(cgp::Point(1,1,1));
+    verts.push_back(cgp::Point(-1,1,1));
+
+    //assign edges
+    Triangle tri;
+    tri.v[0] = 0;
+    tri.v[1] = 1;
+    tri.v[2] = 2;
+
+    tris.clear();
+    tris.push_back(tri);
+
+    //apply smoothing
+    laplacianSmooth(1,0.2f);
+    //check vertex 1
+    if (verts[0].x != 0 || verts[0].y != 0.2f || verts[0].z != 0.2f){
+        cout << verts[0].x << endl;
+        cout << verts[1].x << endl;
+        cout << verts[2].x << endl;
+        cout << "fail1 " << endl;
+        return false;
+    }
+
+    //check vertex 2
+    if (verts[1].x != 0.7f || verts[1].y != 0.9f || verts[1].z != 0.9f){
+        cout << "fail2 " << endl;
+        return false;
+    }
+
+    //check vertex 3
+    if (verts[2].x != -0.7f || verts[2].y != 0.9f || verts[2].z != 0.9f){
+        cout << "fail3 " << endl;
+        return false;
+    }
+
+    return true;
+
 }

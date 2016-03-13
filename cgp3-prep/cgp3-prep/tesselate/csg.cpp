@@ -378,7 +378,7 @@ void Scene::sampleScene()
     diff->left = combine;
     diff->right = cyl2;
 
-    csgroot = sph;
+    csgroot = diff;
 }
 
 void Scene::expensiveScene()

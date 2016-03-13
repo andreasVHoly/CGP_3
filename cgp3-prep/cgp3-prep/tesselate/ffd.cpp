@@ -70,6 +70,7 @@ ffd::ffd(int xnum, int ynum, int znum, cgp::Point corner, cgp::Vector diag)
     dimx = xnum;
     dimy = ynum;
     dimz = znum;
+
     setFrame(corner, diag);
     alloc();
 }
@@ -87,6 +88,8 @@ void ffd::reset()
                 float distZ = origin.z + z * diagonal.k/(dimz-1);
                 //temp point
                 cgp::Point point(distX,distY,distZ);
+                cout << "point: " << point.x << " " << point.y << " " << point.z << endl;
+
                 //create the control point
                 setCP(x,y,z,point);
             }
@@ -268,37 +271,46 @@ void ffd::deform(cgp::Point & pnt)
     t = (float)t1/(float)t2;
     u = (float)u1/(float)u2;
 
-    //get xffd elements s,t,u
-
+    //calculate xffd elements s,t,u
+    //create l,m & n
     float l = dimx-1, m = dimy-1, n = dimz-1;
 
-
-    cgp::Point addX(0,0,0);
+    //create points to hold the sums for each xyz
+    cgp::Point sumX, sumY, sumZ;
+    //loop over all control points
     for (int i = 0; i < dimx; i++){
-        cgp::Point addY(0,0,0);
+        sumY.reset();
         for (int j = 0; j < dimy; j++){
-            cgp::Point addZ(0,0,0);
+            sumZ.reset();
             for (int k = 0; k < dimz; k++){
+                //get control point
                 cgp::Point cp = getCP(i,j,k);
+                //calculate the scalar part & then multiply it by the control point counter parts
                 float valueK = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
-                addZ.x += valueK * cp.x;
-                addZ.y += valueK * cp.y;
-                addZ.z += valueK * cp.z;
+                sumZ.x += valueK * cp.x;
+                sumZ.y += valueK * cp.y;
+                sumZ.z += valueK * cp.z;
             }
+            //same operation just using the previous sum and the new scalar part
             float valueJ = (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j);
-            addY.x += valueJ * addZ.x;
-            addY.y += valueJ * addZ.y;
-            addY.z += valueJ * addZ.z;
+            sumY.x += valueJ * sumZ.x;
+            sumY.y += valueJ * sumZ.y;
+            sumY.z += valueJ * sumZ.z;
         }
+        //same operation just using the previous sum and the new scalar part
         float valueI = (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i);
-        addX.x += valueI * addY.x;
-        addX.y += valueI * addY.y;
-        addX.z += valueI * addY.z;
+        sumX.x += valueI * sumY.x;
+        sumX.y += valueI * sumY.y;
+        sumX.z += valueI * sumY.z;
     }
-
-    pnt = addX;
+    //assign new point
+    pnt = sumX;
 }
 
+
+//method to calulate n choose k
+//method gotten from:
+//http://stackoverflow.com/questions/9330915/number-of-combinations-n-choose-r-in-c
 float ffd::nChoosek( float n, float k )
 {
     if (k > n) return 0;
@@ -312,36 +324,3 @@ float ffd::nChoosek( float n, float k )
     }
     return result;
 }
-
-
-    /*for (int i = 0; i < l; i++){
-        for (int j = 0; j < m; j++){
-            for (int k = 0; k < n; k++){
-                float value = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k) *
-                (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j) *
-                (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i);
-
-                cgp::Point cp = getCP(i,j,k);
-                //convert to a vector
-                cpVec.i = cp.x - origin.x;
-                cpVec.j = cp.y - origin.y;
-                cpVec.k = cp.z - origin.z;
-                cout << "value " << value << endl;
-
-                cpVec.i *= value;
-                cpVec.j *= value;
-                cpVec.k *= value;
-                //cpVec.mult(value);
-                //ans1.add(cpVec);
-
-                ans1.i += cpVec.i;
-                ans1.j += cpVec.j;
-                ans1.k += cpVec.k;
-
-            }
-        }
-    }*/
-
-    /*
-
-    */

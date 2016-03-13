@@ -10,7 +10,8 @@
 class TestMesh : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TestMesh);
-    //CPPUNIT_TEST(testMeshing);
+    CPPUNIT_TEST(testSmoothing);
+    //CPPUNIT_TEST(testAdjList);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -29,6 +30,10 @@ public:
      * @pre bunny.stl must be located in the project root directory
      */
     void testMeshing();
+
+
+    void testSmoothing();
+    void testAdjList();
 };
 
 #endif /* !TILER_TEST_MESH_H */

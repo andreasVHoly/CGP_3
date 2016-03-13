@@ -175,7 +175,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 {
     float nx, ny;
     cgp::Point pnt;
-    
+
     int x = event->x(); int y = event->y();
     float W = (float) width(); float H = (float) height();
 
@@ -185,7 +185,7 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
     if((event->modifiers() == Qt::MetaModifier || event->modifiers() == Qt::AltModifier || event->buttons() == Qt::RightButton))
     {
         // arc rotate in perspective mode
-  
+
         // convert to [0,1] X [0,1] domain
         nx = (2.0f * (float) x - W) / W;
         ny = (H - 2.0f * (float) y) / H;
@@ -226,7 +226,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
 void GLWidget::wheelEvent(QWheelEvent * wheel)
 {
     float del;
- 
+
     QPoint pix = wheel->pixelDelta();
     QPoint deg = wheel->angleDelta();
 
