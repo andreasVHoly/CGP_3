@@ -959,7 +959,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
 {
     //build the adjacency list
     buildAdjList();
-    cout << adjList.size() << endl;
+    //cout << adjList.size() << endl;
     //run it for iter amount of iterations
     for (int it = 0; it < iter; it++){
         //loop through the adjacency list
@@ -974,12 +974,17 @@ void Mesh::laplacianSmooth(int iter, float rate)
 
             //calculate the weight in the equation
             float weight = 1.0/(float)size;
+            cout << "weight " << weight << endl;
 
             for (int h = 0; h < size; h++){
                 //get the adjcent vertex and cal the difference between them on each x,y,z
                 totalX += weight*(verts[i->second[h]].x - verts[i->first].x);
                 totalY += weight*(verts[i->second[h]].y - verts[i->first].y);
                 totalZ += weight*(verts[i->second[h]].z - verts[i->first].z);
+                cout << "vals" << endl;
+                cout << verts[i->second[h]].x << "," <<verts[i->first].x<< endl;
+                cout << verts[i->second[h]].y << "," <<verts[i->first].y<< endl;
+                cout << verts[i->second[h]].z << "," <<verts[i->first].z<< endl;
             }
             //multiply the sum by the rate we get
             cout << "totals" << endl;
@@ -1011,9 +1016,16 @@ void Mesh::buildAdjList(){
     //loop through the triangle list and construct the adjacency hash
     for (int i = 0; i < tris.size(); i++){
         adjList[tris[i].v[0]].push_back(tris[i].v[1]);
+        cout << "pushed into : " << verts[tris[i].v[0]].x <<" "<<  verts[tris[i].v[1]].x << endl;
         adjList[tris[i].v[1]].push_back(tris[i].v[2]);
+        cout << "pushed into : " << verts[tris[i].v[1]].x <<" "<<  verts[tris[i].v[2]].x << endl;
         adjList[tris[i].v[2]].push_back(tris[i].v[0]);
+        cout << "pushed into : " << verts[tris[i].v[2]].x <<" "<<  verts[tris[i].v[0]].x << endl;
     }
+    cout << "in order pushed x's" << endl;
+    cout << verts[adjList[0][0]].x << endl;
+    cout << verts[adjList[1][0]].x  << endl;
+    cout << verts[adjList[2][0]].x  << endl;
 }
 
 
@@ -1615,7 +1627,7 @@ bool Mesh::checkAdjList(){
     buildAdjList();
 
     for(auto i = adjList.begin(); i != adjList.end(); i++){
-        if (!i->second.size() == 2){
+        if (!i->second.size() == 1){
             return false;
         }
     }
@@ -1623,11 +1635,11 @@ bool Mesh::checkAdjList(){
 
 
     //vert 1 adj
-    if (!adjList[0][0] == 1 || !adjList[0][1] == 2) {return false;}
+    if (!adjList[0][0] == 1) {return false;}
     //vert 2 adj
-    if (!adjList[1][0] == 0 || !adjList[1][1] == 2) {return false;}
+    if (!adjList[1][0] == 2) {return false;}
     //vert 3 adj
-    if (!adjList[2][0] == 1 || !adjList[2][1] == 0) {return false;}
+    if (!adjList[2][0] == 0) {return false;}
 
     return true;
 }
@@ -1646,11 +1658,15 @@ bool Mesh::setUpSmoothTest(){
     tri.v[1] = 1;
     tri.v[2] = 2;
 
+    cout << "vert 0 " << verts[tri.v[0]].x << endl;
+    cout << "vert 1 " << verts[tri.v[1]].x << endl;
+    cout << "vert 2 " << verts[tri.v[2]].x << endl;
+
     tris.clear();
     tris.push_back(tri);
 
     //apply smoothing
-    laplacianSmooth(1,0.2f);
+    laplacianSmooth(1,0.5f);
     //check vertex 1
     if (verts[0].x != 0 || verts[0].y != 0.2f || verts[0].z != 0.2f){
         cout << verts[0].x << endl;

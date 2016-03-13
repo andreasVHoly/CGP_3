@@ -10,8 +10,8 @@
 class TestMesh : public CppUnit::TestFixture
 {
     CPPUNIT_TEST_SUITE(TestMesh);
-    CPPUNIT_TEST(testSmoothing);
-    //CPPUNIT_TEST(testAdjList);
+    //CPPUNIT_TEST(testSmoothing);
+    CPPUNIT_TEST(testAdjList);
     CPPUNIT_TEST_SUITE_END();
 
 private:
