@@ -164,13 +164,37 @@ test/CMakeFiles/tilertest.dir/tilertest.cpp.o.provides: test/CMakeFiles/tilertes
 
 test/CMakeFiles/tilertest.dir/tilertest.cpp.o.provides.build: test/CMakeFiles/tilertest.dir/tilertest.cpp.o
 
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.o: test/CMakeFiles/tilertest.dir/flags.make
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.o: ../test/test_ffd.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object test/CMakeFiles/tilertest.dir/test_ffd.cpp.o"
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build/test && /usr/bin/g++-4.8   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/tilertest.dir/test_ffd.cpp.o -c /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.cpp
+
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tilertest.dir/test_ffd.cpp.i"
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build/test && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.cpp > CMakeFiles/tilertest.dir/test_ffd.cpp.i
+
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tilertest.dir/test_ffd.cpp.s"
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build/test && /usr/bin/g++-4.8  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.cpp -o CMakeFiles/tilertest.dir/test_ffd.cpp.s
+
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.requires:
+.PHONY : test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.requires
+
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.provides: test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.requires
+	$(MAKE) -f test/CMakeFiles/tilertest.dir/build.make test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.provides.build
+.PHONY : test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.provides
+
+test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.provides.build: test/CMakeFiles/tilertest.dir/test_ffd.cpp.o
+
 # Object files for target tilertest
 tilertest_OBJECTS = \
 "CMakeFiles/tilertest.dir/testutil.cpp.o" \
 "CMakeFiles/tilertest.dir/test_mesh.cpp.o" \
 "CMakeFiles/tilertest.dir/test_voxels.cpp.o" \
 "CMakeFiles/tilertest.dir/test_csg.cpp.o" \
-"CMakeFiles/tilertest.dir/tilertest.cpp.o"
+"CMakeFiles/tilertest.dir/tilertest.cpp.o" \
+"CMakeFiles/tilertest.dir/test_ffd.cpp.o"
 
 # External object files for target tilertest
 tilertest_EXTERNAL_OBJECTS =
@@ -180,6 +204,7 @@ test/tilertest: test/CMakeFiles/tilertest.dir/test_mesh.cpp.o
 test/tilertest: test/CMakeFiles/tilertest.dir/test_voxels.cpp.o
 test/tilertest: test/CMakeFiles/tilertest.dir/test_csg.cpp.o
 test/tilertest: test/CMakeFiles/tilertest.dir/tilertest.cpp.o
+test/tilertest: test/CMakeFiles/tilertest.dir/test_ffd.cpp.o
 test/tilertest: test/CMakeFiles/tilertest.dir/build.make
 test/tilertest: tesselate/libtess.a
 test/tilertest: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
@@ -217,6 +242,7 @@ test/CMakeFiles/tilertest.dir/requires: test/CMakeFiles/tilertest.dir/test_mesh.
 test/CMakeFiles/tilertest.dir/requires: test/CMakeFiles/tilertest.dir/test_voxels.cpp.o.requires
 test/CMakeFiles/tilertest.dir/requires: test/CMakeFiles/tilertest.dir/test_csg.cpp.o.requires
 test/CMakeFiles/tilertest.dir/requires: test/CMakeFiles/tilertest.dir/tilertest.cpp.o.requires
+test/CMakeFiles/tilertest.dir/requires: test/CMakeFiles/tilertest.dir/test_ffd.cpp.o.requires
 .PHONY : test/CMakeFiles/tilertest.dir/requires
 
 test/CMakeFiles/tilertest.dir/clean:

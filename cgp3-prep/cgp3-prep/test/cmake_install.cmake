@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/tiler/test
+# Install script for directory: /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -12,7 +12,7 @@ IF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     STRING(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   ELSE(BUILD_TYPE)
-    SET(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    SET(CMAKE_INSTALL_CONFIG_NAME "")
   ENDIF(BUILD_TYPE)
   MESSAGE(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 ENDIF(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
@@ -27,4 +27,18 @@ IF(NOT CMAKE_INSTALL_COMPONENT)
   ENDIF(COMPONENT)
 ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
+# Install shared libraries without execute permission?
+IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  SET(CMAKE_INSTALL_SO_NO_EXE "1")
+ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
+IF(CMAKE_INSTALL_COMPONENT)
+  SET(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
+ELSE(CMAKE_INSTALL_COMPONENT)
+  SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
+ENDIF(CMAKE_INSTALL_COMPONENT)
+
+FILE(WRITE "/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/${CMAKE_INSTALL_MANIFEST}" "")
+FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
+  FILE(APPEND "/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+ENDFOREACH(file)

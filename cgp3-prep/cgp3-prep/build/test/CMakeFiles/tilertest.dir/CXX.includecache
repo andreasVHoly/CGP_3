@@ -84,20 +84,6 @@ QDebug
 QString
 -
 
-../tesselate/mesh.h
-vector
--
-stdio.h
--
-iostream
--
-renderer.h
-../tesselate/renderer.h
-ffd.h
-../tesselate/ffd.h
-voxels.h
-../tesselate/voxels.h
-
 ../tesselate/renderer.h
 iostream
 -
@@ -184,16 +170,6 @@ string
 glm/glm.hpp
 -
 
-../tesselate/voxels.h
-vector
--
-stdio.h
--
-iostream
--
-vecpnt.h
-../tesselate/vecpnt.h
-
 ../test/testutil.h
 array
 -
@@ -204,13 +180,13 @@ cppunit/TestAssert.h
 boost/program_options.hpp
 -
 
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_mesh.cpp
+/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.cpp
 config.h
 -
 test/testutil.h
 -
-test_mesh.h
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_mesh.h
+test_ffd.h
+/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.h
 stdio.h
 -
 cstdint
@@ -222,13 +198,13 @@ cppunit/extensions/TestFactoryRegistry.h
 cppunit/extensions/HelperMacros.h
 -
 
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_mesh.h
+/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/test_ffd.h
 string
 -
 cppunit/extensions/HelperMacros.h
 -
-tesselate/mesh.h
-/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/tesselate/mesh.h
+tesselate/ffd.h
+/home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/tesselate/ffd.h
 
 /usr/include/qt5/QtCore/QDebug
 qdebug.h

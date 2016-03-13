@@ -30,30 +30,27 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/local/bin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /opt/local/bin/cmake -E remove -f
+RM = /usr/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_SOURCE_DIR = /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts"
+CMAKE_BINARY_DIR = /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/opt/local/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
+	/usr/bin/cmake -i .
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -63,33 +60,23 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/local/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -E cmake_progress_start "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/test/CMakeFiles/progress.marks"
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/CMakeFiles /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/test/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 test/clean
+	$(MAKE) -f CMakeFiles/Makefile2 clean
 .PHONY : clean
 
 # The main clean target
@@ -98,104 +85,121 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-test/CMakeFiles/utstest.dir/rule:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/utstest.dir/rule
-.PHONY : test/CMakeFiles/utstest.dir/rule
+#=============================================================================
+# Target rules for targets named tilertest
 
-# Convenience name for target.
-utstest: test/CMakeFiles/utstest.dir/rule
-.PHONY : utstest
+# Build rule for target.
+tilertest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tilertest
+.PHONY : tilertest
 
 # fast build rule for target.
-utstest/fast:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/build
-.PHONY : utstest/fast
+tilertest/fast:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/build
+.PHONY : tilertest/fast
 
-testutil.o: testutil.cpp.o
+# target to build an object file
+test_csg.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_csg.o
+.PHONY : test_csg.o
+
+# target to preprocess a source file
+test_csg.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_csg.i
+.PHONY : test_csg.i
+
+# target to generate assembly for a file
+test_csg.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_csg.s
+.PHONY : test_csg.s
+
+# target to build an object file
+test_ffd.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_ffd.o
+.PHONY : test_ffd.o
+
+# target to preprocess a source file
+test_ffd.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_ffd.i
+.PHONY : test_ffd.i
+
+# target to generate assembly for a file
+test_ffd.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_ffd.s
+.PHONY : test_ffd.s
+
+# target to build an object file
+test_mesh.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_mesh.o
+.PHONY : test_mesh.o
+
+# target to preprocess a source file
+test_mesh.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_mesh.i
+.PHONY : test_mesh.i
+
+# target to generate assembly for a file
+test_mesh.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_mesh.s
+.PHONY : test_mesh.s
+
+# target to build an object file
+test_voxels.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_voxels.o
+.PHONY : test_voxels.o
+
+# target to preprocess a source file
+test_voxels.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_voxels.i
+.PHONY : test_voxels.i
+
+# target to generate assembly for a file
+test_voxels.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/test_voxels.s
+.PHONY : test_voxels.s
+
+# target to build an object file
+testutil.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/testutil.o
 .PHONY : testutil.o
 
-# target to build an object file
-testutil.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil.cpp.o
-.PHONY : testutil.cpp.o
-
-testutil.i: testutil.cpp.i
+# target to preprocess a source file
+testutil.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/testutil.i
 .PHONY : testutil.i
 
-# target to preprocess a source file
-testutil.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil.cpp.i
-.PHONY : testutil.cpp.i
-
-testutil.s: testutil.cpp.s
+# target to generate assembly for a file
+testutil.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/testutil.s
 .PHONY : testutil.s
 
-# target to generate assembly for a file
-testutil.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil.cpp.s
-.PHONY : testutil.cpp.s
-
-testutil_cl.o: testutil_cl.cpp.o
-.PHONY : testutil_cl.o
-
 # target to build an object file
-testutil_cl.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil_cl.cpp.o
-.PHONY : testutil_cl.cpp.o
-
-testutil_cl.i: testutil_cl.cpp.i
-.PHONY : testutil_cl.i
+tilertest.o:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/tilertest.o
+.PHONY : tilertest.o
 
 # target to preprocess a source file
-testutil_cl.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil_cl.cpp.i
-.PHONY : testutil_cl.cpp.i
-
-testutil_cl.s: testutil_cl.cpp.s
-.PHONY : testutil_cl.s
+tilertest.i:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/tilertest.i
+.PHONY : tilertest.i
 
 # target to generate assembly for a file
-testutil_cl.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/testutil_cl.cpp.s
-.PHONY : testutil_cl.cpp.s
-
-utstest.o: utstest.cpp.o
-.PHONY : utstest.o
-
-# target to build an object file
-utstest.cpp.o:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/utstest.cpp.o
-.PHONY : utstest.cpp.o
-
-utstest.i: utstest.cpp.i
-.PHONY : utstest.i
-
-# target to preprocess a source file
-utstest.cpp.i:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/utstest.cpp.i
-.PHONY : utstest.cpp.i
-
-utstest.s: utstest.cpp.s
-.PHONY : utstest.s
-
-# target to generate assembly for a file
-utstest.cpp.s:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(MAKE) -f test/CMakeFiles/utstest.dir/build.make test/CMakeFiles/utstest.dir/utstest.cpp.s
-.PHONY : utstest.cpp.s
+tilertest.s:
+	$(MAKE) -f CMakeFiles/tilertest.dir/build.make CMakeFiles/tilertest.dir/tilertest.s
+.PHONY : tilertest.s
 
 # Help Target
 help:
@@ -205,17 +209,25 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test"
-	@echo "... utstest"
+	@echo "... tilertest"
+	@echo "... test_csg.o"
+	@echo "... test_csg.i"
+	@echo "... test_csg.s"
+	@echo "... test_ffd.o"
+	@echo "... test_ffd.i"
+	@echo "... test_ffd.s"
+	@echo "... test_mesh.o"
+	@echo "... test_mesh.i"
+	@echo "... test_mesh.s"
+	@echo "... test_voxels.o"
+	@echo "... test_voxels.i"
+	@echo "... test_voxels.s"
 	@echo "... testutil.o"
 	@echo "... testutil.i"
 	@echo "... testutil.s"
-	@echo "... testutil_cl.o"
-	@echo "... testutil_cl.i"
-	@echo "... testutil_cl.s"
-	@echo "... utstest.o"
-	@echo "... utstest.i"
-	@echo "... utstest.s"
+	@echo "... tilertest.o"
+	@echo "... tilertest.i"
+	@echo "... tilertest.s"
 .PHONY : help
 
 
@@ -227,6 +239,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd "/Volumes/1Tb Macintosh HD/Users/Jed/Desktop/PROGRAMMING/uts" && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

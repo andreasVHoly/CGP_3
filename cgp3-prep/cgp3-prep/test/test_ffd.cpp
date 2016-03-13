@@ -23,7 +23,7 @@ void TestFFD::tearDown()
 
 
 void TestFFD::testNChooseK(){
-
+    cout << "\t...TESTING N CHOOSE K METHOD..." << endl;
     //answers calculated on calculator
     float ans1 = 56;
     float ans2 = 45;
@@ -32,30 +32,32 @@ void TestFFD::testNChooseK(){
     CPPUNIT_ASSERT(ffdobj->nChoosek(8,3) == ans1);
     CPPUNIT_ASSERT(ffdobj->nChoosek(10,2) == ans2);
     CPPUNIT_ASSERT(ffdobj->nChoosek(13,12) == ans3);
+
+    cout << "\t...TESTED N CHOOSE K METHOD..." << endl;
 }
 
 
 
 void TestFFD::resetTest(){
-
+    cout << "\t...TESTING RESET METHOD..." << endl;
     cgp::Vector diag(2.0f, 2.0f, 2.0f);
     cgp::Point corner(-1.0f, -1.0f, -1.0f);
-    ffdobj.setDim(2,2,2);
+    ffdobj->setDim(2,2,2);
 
     //CHECK THAT all are 0
 
     for (int i = 0; i < 2; i++){
         for (int j = 0; j < 2; j++){
             for (int k = 0; k < 2; k++){
-                CPPUNIT_ASSERT(getCP(i,j,k).x == 0);
-                CPPUNIT_ASSERT(getCP(i,j,k).y == 0);
-                CPPUNIT_ASSERT(getCP(i,j,k).z == 0);
+                CPPUNIT_ASSERT(ffdobj->getCP(i,j,k).x == 0);
+                CPPUNIT_ASSERT(ffdobj->getCP(i,j,k).y == 0);
+                CPPUNIT_ASSERT(ffdobj->getCP(i,j,k).z == 0);
             }
         }
     }
 
 
-    ffdobj.setFrame(corner,diag);
+    ffdobj->setFrame(corner,diag);
 
 
     std::vector<cgp::Point> answers;
@@ -69,17 +71,18 @@ void TestFFD::resetTest(){
     answers.push_back(cgp::Point(1,1,1));
 
     int index = 0;
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            for (int k = 0; k < 3; k++){
+    for (int i = 0; i < 2; i++){
+        for (int j = 0; j < 2; j++){
+            for (int k = 0; k < 2; k++){
                 CPPUNIT_ASSERT(answers[index].x == ffdobj->getCP(i,j,k).x);
                 CPPUNIT_ASSERT(answers[index].y == ffdobj->getCP(i,j,k).y);
-                CPPUNIT_ASSERT(answers[index].z == ffdobj->getCP(i,j,k)).z;
+                CPPUNIT_ASSERT(answers[index].z == ffdobj->getCP(i,j,k).z);
+                index++;
             }
         }
     }
 
-
+    cout << "\t...TESTED RESET METHOD..." << endl;
 }
 
 //#if 0 /* Disabled since it crashes the whole test suite */

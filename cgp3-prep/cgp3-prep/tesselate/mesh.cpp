@@ -1631,9 +1631,6 @@ bool Mesh::checkAdjList(){
             return false;
         }
     }
-
-
-
     //vert 1 adj
     if (!adjList[0][0] == 1) {return false;}
     //vert 2 adj

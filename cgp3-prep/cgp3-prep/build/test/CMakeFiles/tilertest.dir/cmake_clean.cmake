@@ -4,6 +4,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/tilertest.dir/test_voxels.cpp.o"
   "CMakeFiles/tilertest.dir/test_csg.cpp.o"
   "CMakeFiles/tilertest.dir/tilertest.cpp.o"
+  "CMakeFiles/tilertest.dir/test_ffd.cpp.o"
   "tilertest.pdb"
   "tilertest"
 )

@@ -146,6 +146,30 @@ test_csg.cpp.s:
 	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build && $(MAKE) -f test/CMakeFiles/tilertest.dir/build.make test/CMakeFiles/tilertest.dir/test_csg.cpp.s
 .PHONY : test_csg.cpp.s
 
+test_ffd.o: test_ffd.cpp.o
+.PHONY : test_ffd.o
+
+# target to build an object file
+test_ffd.cpp.o:
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build && $(MAKE) -f test/CMakeFiles/tilertest.dir/build.make test/CMakeFiles/tilertest.dir/test_ffd.cpp.o
+.PHONY : test_ffd.cpp.o
+
+test_ffd.i: test_ffd.cpp.i
+.PHONY : test_ffd.i
+
+# target to preprocess a source file
+test_ffd.cpp.i:
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build && $(MAKE) -f test/CMakeFiles/tilertest.dir/build.make test/CMakeFiles/tilertest.dir/test_ffd.cpp.i
+.PHONY : test_ffd.cpp.i
+
+test_ffd.s: test_ffd.cpp.s
+.PHONY : test_ffd.s
+
+# target to generate assembly for a file
+test_ffd.cpp.s:
+	cd /home/user/Honours/CGP/Ass3/cgp3-prep/cgp3-prep/build && $(MAKE) -f test/CMakeFiles/tilertest.dir/build.make test/CMakeFiles/tilertest.dir/test_ffd.cpp.s
+.PHONY : test_ffd.cpp.s
+
 test_mesh.o: test_mesh.cpp.o
 .PHONY : test_mesh.o
 
@@ -255,6 +279,9 @@ help:
 	@echo "... test_csg.o"
 	@echo "... test_csg.i"
 	@echo "... test_csg.s"
+	@echo "... test_ffd.o"
+	@echo "... test_ffd.i"
+	@echo "... test_ffd.s"
 	@echo "... test_mesh.o"
 	@echo "... test_mesh.i"
 	@echo "... test_mesh.s"
