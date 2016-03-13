@@ -231,7 +231,6 @@ void ffd::deform(cgp::Point & pnt)
     cgp::Vector S(diagonal.i,0.0,0.0);
     cgp::Vector T(0.0,diagonal.j,0.0);
     cgp::Vector U(0.0,0.0,diagonal.k);
-    cout << "diag " << diagonal.i << " , " << diagonal.j << " , " << diagonal.k << endl;
     //init
     float s = 0, t = 0, u = 0;
 
@@ -274,14 +273,36 @@ void ffd::deform(cgp::Point & pnt)
     //float l = dimx, m = dimy, n = dimz;
     float l = dimx-1, m = dimy-1, n = dimz-1;
 
-
+    
+    cgp::Point addX(0,0,0);
     for (int i = 0; i < l; i++){
+        cgp::Point addY(0,0,0);
         for (int j = 0; j < m; j++){
+            cgp::Point addZ(0,0,0);
             for (int k = 0; k < n; k++){
+                cgp::Point cp = getCP(i,j,k);
+                float valueK = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
+                addZ.x += valueK * cp.x;
+                addZ.y += valueK * cp.y;
+                addZ.z += valueK * cp.z;
 
             }
+            float valueJ = (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j);
+            addY.x += valueJ * addZ.x;
+            addY.y += valueJ * addZ.y;
+            addY.z += valueJ * addZ.z;
+
+
         }
+        float valueI = (float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i);
+        addX.x += valueI * addY.x;
+        addX.y += valueI * addY.y;
+        addX.z += valueI * addY.z;
     }
+
+    pnt.x = addX.x;
+    pnt.y = addX.y;
+    pnt.z = addX.z;
 
 }
 
@@ -330,60 +351,4 @@ float ffd::nChoosek( float n, float k )
 
     /*
 
-    cgp::Vector final;
-    cgp::Vector ans1;
-    cgp::Vector ans2;
-    cgp::Vector ans3;
-    cgp::Vector add2;
-    cgp::Vector finalAns;
-    cgp::Vector cpVec;
-    ans1.i = 1;
-    ans1.j = 1;
-    ans1.k = 1;
-    for (int i = 0; i < l; i++){
-        //init
-
-        add2.i = 1;
-        add2.j = 1;
-        add2.k = 1;
-        ans2.i = 1;
-        ans2.j = 1;
-        ans2.k = 1;
-        for (int j = 0; j < m; j++){
-            //init
-
-            ans3.i = 1;
-            ans3.j = 1;
-            ans3.k = 1;
-            for (int k = 0; k < n; k++){
-                //get control point ijk
-                cgp::Point cp = getCP(i,j,k);
-                //convert to a vector
-                cpVec.i = cp.x - origin.x;
-                cpVec.j = cp.y - origin.y;
-                cpVec.k = cp.z - origin.z;
-
-                float value = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
-                cpVec.mult(value);
-                ans3.add(cpVec);
-            }
-
-            //multiply inner answers and new calculation
-            float val2 = (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j);
-
-            ans2.mult(val2);
-            ans2.mult(ans3);
-            add2.add(ans2);
-        }
-        //multiplay inner answer and add
-        ans1.mult(add2);
-        ans1.mult((float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i));
-        finalAns.add(ans1);
-
-    }
-
-
-    //set point to new coordinates
-    pnt.x = finalAns.i;
-    pnt.y = finalAns.j;
-    pnt.z = finalAns.k;*/
+    */
