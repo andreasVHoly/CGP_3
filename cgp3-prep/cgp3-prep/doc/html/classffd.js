@@ -14,6 +14,7 @@ var classffd =
     [ "getDim", "classffd.html#a536e36be0f92068999df113ee04d1899", null ],
     [ "getFrame", "classffd.html#aff2dfb4721ca91ab5c1de06539ffe6b2", null ],
     [ "inCPBounds", "classffd.html#a975e728358d05e105c0f811874a86d17", null ],
+    [ "nChoosek", "classffd.html#a2ba72877af7758a3215b4c7a04857492", null ],
     [ "reset", "classffd.html#a8cdd00f23fdfef1b4d516a451f570465", null ],
     [ "setCP", "classffd.html#a1238fca69a55da574f0fb99e7e1fba84", null ],
     [ "setDim", "classffd.html#a7704dfba4fcc0aec4726372c6c4c954f", null ],

@@ -125,7 +125,7 @@ public:
      * (Required to shoehorn Bloyd's code into current framework - see http://paulbourke.net/geometry/polygonise/marchingsource.cpp)
      * @param x, y, z   3d index for the lower, front, left corner of the cell
      * @retval  bit code index for MC table
-     * @todo VoxelVolume::getMCVertIdx to be completed for CGP Assignment4
+     
      */
     int getMCVertIdx(int x, int y, int z);
 

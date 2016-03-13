@@ -14,6 +14,7 @@ var classVoxelVolume =
     [ "getMCEdgeXsect", "classVoxelVolume.html#a69920e0ba8f5741815ab15f1c383f5f9", null ],
     [ "getMCVertIdx", "classVoxelVolume.html#af53a26f2e217c79bdc0cf03014cbee89", null ],
     [ "getVoxelPos", "classVoxelVolume.html#a982ae6db5dcda34e341b66f7f6e95838", null ],
+    [ "getVoxelPosAtPoint", "classVoxelVolume.html#a8d8e5bf4eabb8a3633ea6b4dae54c77a", null ],
     [ "set", "classVoxelVolume.html#a2d0f093d9f7cf0085e1e3ebdc58e5f0d", null ],
     [ "setDim", "classVoxelVolume.html#ab77b01a8294cb3662b15c7f84b66470b", null ],
     [ "setFrame", "classVoxelVolume.html#a052172978b56c04e2cebb55fa955732b", null ],

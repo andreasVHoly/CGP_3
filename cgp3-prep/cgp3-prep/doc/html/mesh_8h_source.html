@@ -203,95 +203,103 @@ $(document).ready(function(){initNavTree('mesh_8h_source.html','');});
 <div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classMesh.html#a22ca27ef2f1bff3ef7e9ca62884f08e9">  166</a></span>&#160;    <a class="code" href="classcgp_1_1Vector.html">cgp::Vector</a> <a class="code" href="classMesh.html#a22ca27ef2f1bff3ef7e9ca62884f08e9">trx</a>;                 </div>
 <div class="line"><a name="l00167"></a><span class="lineno"><a class="line" href="classMesh.html#aeff28a33caaef5a72f425b120de1d996">  167</a></span>&#160;    <span class="keywordtype">float</span> xrot, yrot, <a class="code" href="classMesh.html#aeff28a33caaef5a72f425b120de1d996">zrot</a>;     </div>
 <div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classMesh.html#a027072e9d4198f3599f8968ebd3beb5b">  168</a></span>&#160;    std::vector&lt;Sphere&gt; <a class="code" href="classMesh.html#a027072e9d4198f3599f8968ebd3beb5b">boundspheres</a>; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">bool</span> findVert(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt, <span class="keywordtype">int</span> &amp;idx);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">long</span> hashVert(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt, <a class="code" href="classcgp_1_1BoundBox.html">cgp::BoundBox</a> bbox);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordtype">long</span> hashEdge(<span class="keywordtype">int</span> v0, <span class="keywordtype">int</span> v1);</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordtype">void</span> mergeVerts();</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">void</span> deriveVertNorms();</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordtype">void</span> deriveFaceNorms();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordtype">void</span> buildTransform(glm::mat4x4 &amp;tfm);</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">bool</span> sameTriangle(<a class="code" href="structTriangle.html">Triangle</a> t1, <a class="code" href="structTriangle.html">Triangle</a> t2);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordtype">bool</span> sameEdge(<a class="code" href="structEdge.html">Edge</a> e1, <a class="code" href="structEdge.html">Edge</a> e2, <span class="keywordtype">bool</span> &amp; opposite);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordtype">void</span> buildSphereAccel(<span class="keywordtype">int</span> maxspheres);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">  237</a></span>&#160;    <a class="code" href="classShapeGeometry.html">ShapeGeometry</a> <a class="code" href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">geometry</a>;         </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    std::vector&lt;Edge&gt; edges;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    std::unordered_map&lt;int, vector&lt;int&gt;&gt; edgelookup;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    std::unordered_map&lt;int, vector&lt;int&gt;&gt; adjList;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">bool</span> findVert(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt, <span class="keywordtype">int</span> &amp;idx);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordtype">long</span> hashVert(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt, <a class="code" href="classcgp_1_1BoundBox.html">cgp::BoundBox</a> bbox);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">long</span> hashEdge(<span class="keywordtype">int</span> v0, <span class="keywordtype">int</span> v1);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">void</span> mergeVerts();</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordtype">void</span> deriveVertNorms();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordtype">void</span> deriveFaceNorms();</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">void</span> buildTransform(glm::mat4x4 &amp;tfm);</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordtype">bool</span> sameTriangle(<a class="code" href="structTriangle.html">Triangle</a> t1, <a class="code" href="structTriangle.html">Triangle</a> t2);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">bool</span> sameEdge(<a class="code" href="structEdge.html">Edge</a> e1, <a class="code" href="structEdge.html">Edge</a> e2, <span class="keywordtype">bool</span> &amp; opposite);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordtype">void</span> buildSphereAccel(<span class="keywordtype">int</span> maxspheres);</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <a class="code" href="classMesh.html">Mesh</a>();</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classMesh.html">Mesh</a>();</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="keywordtype">void</span> hashEdgeSort();</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">void</span> buildAdjList();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordtype">void</span> clear();</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">  249</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">empty</a>(){ <span class="keywordflow">return</span> verts.empty(); }</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;</div>
-<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">  252</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">setScale</a>(<span class="keywordtype">float</span> scf){ scale = scf; }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;</div>
-<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">  255</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">getScale</a>(){ <span class="keywordflow">return</span> scale; }</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
-<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="classMesh.html#a862bfe226cae234e068f50239661ece6">  258</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a862bfe226cae234e068f50239661ece6">setTranslation</a>(<a class="code" href="classcgp_1_1Vector.html">cgp::Vector</a> tvec){ trx = tvec; }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;</div>
-<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">  261</a></span>&#160;    <a class="code" href="classcgp_1_1Vector.html">cgp::Vector</a> <a class="code" href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">getTranslation</a>(){ <span class="keywordflow">return</span> trx; }</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
-<div class="line"><a name="l00264"></a><span class="lineno"><a class="line" href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">  264</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">setRotations</a>(<span class="keywordtype">float</span> ax, <span class="keywordtype">float</span> ay, <span class="keywordtype">float</span> az){ xrot = ax; yrot = ay; zrot = az; }</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">  267</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">getRotations</a>(<span class="keywordtype">float</span> &amp;ax, <span class="keywordtype">float</span> &amp;ay, <span class="keywordtype">float</span> &amp;az){ ax = xrot; ay = yrot; az = zrot; }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">  270</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">setColour</a>(GLfloat * setcol){ col = setcol; }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordtype">bool</span> bindGeometry(<a class="code" href="classView.html">View</a> * view, <a class="code" href="structShapeDrawData.html">ShapeDrawData</a> &amp;sdd);</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordtype">void</span> genGeometry(<a class="code" href="classShapeGeometry.html">ShapeGeometry</a> * geom, <a class="code" href="classView.html">View</a> * view);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">bool</span> pointContainment(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt);</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">  245</a></span>&#160;    <a class="code" href="classShapeGeometry.html">ShapeGeometry</a> <a class="code" href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">geometry</a>;         </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="classMesh.html">Mesh</a>();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classMesh.html">Mesh</a>();</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">  257</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">empty</a>(){ <span class="keywordflow">return</span> verts.empty(); }</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
+<div class="line"><a name="l00260"></a><span class="lineno"><a class="line" href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">  260</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">setScale</a>(<span class="keywordtype">float</span> scf){ scale = scf; }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
+<div class="line"><a name="l00263"></a><span class="lineno"><a class="line" href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">  263</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">getScale</a>(){ <span class="keywordflow">return</span> scale; }</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
+<div class="line"><a name="l00266"></a><span class="lineno"><a class="line" href="classMesh.html#a862bfe226cae234e068f50239661ece6">  266</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a862bfe226cae234e068f50239661ece6">setTranslation</a>(<a class="code" href="classcgp_1_1Vector.html">cgp::Vector</a> tvec){ trx = tvec; }</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;</div>
+<div class="line"><a name="l00269"></a><span class="lineno"><a class="line" href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">  269</a></span>&#160;    <a class="code" href="classcgp_1_1Vector.html">cgp::Vector</a> <a class="code" href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">getTranslation</a>(){ <span class="keywordflow">return</span> trx; }</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;</div>
+<div class="line"><a name="l00272"></a><span class="lineno"><a class="line" href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">  272</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">setRotations</a>(<span class="keywordtype">float</span> ax, <span class="keywordtype">float</span> ay, <span class="keywordtype">float</span> az){ xrot = ax; yrot = ay; zrot = az; }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">  275</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">getRotations</a>(<span class="keywordtype">float</span> &amp;ax, <span class="keywordtype">float</span> &amp;ay, <span class="keywordtype">float</span> &amp;az){ ax = xrot; ay = yrot; az = zrot; }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno"><a class="line" href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">  278</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">setColour</a>(GLfloat * setcol){ col = setcol; }</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordtype">bool</span> bindGeometry(<a class="code" href="classView.html">View</a> * view, <a class="code" href="structShapeDrawData.html">ShapeDrawData</a> &amp;sdd);</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordtype">void</span> genGeometry(<a class="code" href="classShapeGeometry.html">ShapeGeometry</a> * geom, <a class="code" href="classView.html">View</a> * view);</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordtype">void</span> boxFit(<span class="keywordtype">float</span> sidelen);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordtype">void</span> marchingCubes(<a class="code" href="classVoxelVolume.html">VoxelVolume</a> vox);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordtype">bool</span> pointContainment(<a class="code" href="classcgp_1_1Point.html">cgp::Point</a> pnt);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordtype">void</span> boxFit(<span class="keywordtype">float</span> sidelen);</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">void</span> laplacianSmooth(<span class="keywordtype">int</span> iter, <span class="keywordtype">float</span> rate);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">void</span> marchingCubes(<a class="code" href="classVoxelVolume.html">VoxelVolume</a> vox);</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordtype">void</span> applyFFD(<a class="code" href="classffd.html">ffd</a> * lat);</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">bool</span> readSTL(<span class="keywordtype">string</span> filename);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordtype">void</span> laplacianSmooth(<span class="keywordtype">int</span> iter, <span class="keywordtype">float</span> rate);</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">void</span> applyFFD(<a class="code" href="classffd.html">ffd</a> * lat);</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordtype">bool</span> writeSTL(<span class="keywordtype">string</span> filename);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordtype">bool</span> readSTL(<span class="keywordtype">string</span> filename);</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;    <span class="keywordtype">bool</span> basicValidity();</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordtype">bool</span> manifoldValidity();</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keywordtype">void</span> validTetTest();</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordtype">void</span> basicBreakTest();</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordtype">void</span> touchTetsTest();</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordtype">void</span> openTetTest();</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    <span class="keywordtype">void</span> overlapTetTest();</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;};</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordtype">bool</span> writeSTL(<span class="keywordtype">string</span> filename);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordtype">bool</span> basicValidity();</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordtype">bool</span> manifoldValidity();</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordtype">void</span> validTetTest();</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">void</span> basicBreakTest();</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <span class="keywordtype">void</span> touchTetsTest();</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <span class="keywordtype">void</span> openTetTest();</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordtype">void</span> overlapTetTest();</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;};</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="classffd_html"><div class="ttname"><a href="classffd.html">ffd</a></div><div class="ttdoc">Free-Form Deformation of geometric models. </div><div class="ttdef"><b>Definition:</b> ffd.h:18</div></div>
 <div class="ttc" id="classCylinder_html_af8688f69109490fbfcb8951327a86036"><div class="ttname"><a href="classCylinder.html#af8688f69109490fbfcb8951327a86036">Cylinder::e</a></div><div class="ttdeci">cgp::Point e</div><div class="ttdoc">start and end points of the cylinder </div><div class="ttdef"><b>Definition:</b> mesh.h:115</div></div>
 <div class="ttc" id="structShapeDrawData_html"><div class="ttname"><a href="structShapeDrawData.html">ShapeDrawData</a></div><div class="ttdoc">Container for rendering properties, primarily colour. </div><div class="ttdef"><b>Definition:</b> shape.h:14</div></div>
-<div class="ttc" id="classMesh_html_a20190e4ca7f13c2b5e1905c8e63d5f56"><div class="ttname"><a href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">Mesh::setScale</a></div><div class="ttdeci">void setScale(float scf)</div><div class="ttdoc">Setter for scale. </div><div class="ttdef"><b>Definition:</b> mesh.h:252</div></div>
-<div class="ttc" id="classMesh_html_a9504fb180aedd805d5644ccbda1a6f4e"><div class="ttname"><a href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">Mesh::getRotations</a></div><div class="ttdeci">void getRotations(float &amp;ax, float &amp;ay, float &amp;az)</div><div class="ttdoc">Getter for rotation angles. </div><div class="ttdef"><b>Definition:</b> mesh.h:267</div></div>
+<div class="ttc" id="classMesh_html_a20190e4ca7f13c2b5e1905c8e63d5f56"><div class="ttname"><a href="classMesh.html#a20190e4ca7f13c2b5e1905c8e63d5f56">Mesh::setScale</a></div><div class="ttdeci">void setScale(float scf)</div><div class="ttdoc">Setter for scale. </div><div class="ttdef"><b>Definition:</b> mesh.h:260</div></div>
+<div class="ttc" id="classMesh_html_a9504fb180aedd805d5644ccbda1a6f4e"><div class="ttname"><a href="classMesh.html#a9504fb180aedd805d5644ccbda1a6f4e">Mesh::getRotations</a></div><div class="ttdeci">void getRotations(float &amp;ax, float &amp;ay, float &amp;az)</div><div class="ttdoc">Getter for rotation angles. </div><div class="ttdef"><b>Definition:</b> mesh.h:275</div></div>
 <div class="ttc" id="structTriangle_html"><div class="ttname"><a href="structTriangle.html">Triangle</a></div><div class="ttdoc">A triangle in 3D space, with 3 indices into a vertex list and an outward facing normal. </div><div class="ttdef"><b>Definition:</b> mesh.h:24</div></div>
-<div class="ttc" id="classMesh_html_a429d8cef6e621b68bd68fc5b9e86af3c"><div class="ttname"><a href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">Mesh::setColour</a></div><div class="ttdeci">void setColour(GLfloat *setcol)</div><div class="ttdoc">Setter for colour. </div><div class="ttdef"><b>Definition:</b> mesh.h:270</div></div>
-<div class="ttc" id="classMesh_html_a862bfe226cae234e068f50239661ece6"><div class="ttname"><a href="classMesh.html#a862bfe226cae234e068f50239661ece6">Mesh::setTranslation</a></div><div class="ttdeci">void setTranslation(cgp::Vector tvec)</div><div class="ttdoc">Setter for translation. </div><div class="ttdef"><b>Definition:</b> mesh.h:258</div></div>
+<div class="ttc" id="classMesh_html_a429d8cef6e621b68bd68fc5b9e86af3c"><div class="ttname"><a href="classMesh.html#a429d8cef6e621b68bd68fc5b9e86af3c">Mesh::setColour</a></div><div class="ttdeci">void setColour(GLfloat *setcol)</div><div class="ttdoc">Setter for colour. </div><div class="ttdef"><b>Definition:</b> mesh.h:278</div></div>
+<div class="ttc" id="classMesh_html_a862bfe226cae234e068f50239661ece6"><div class="ttname"><a href="classMesh.html#a862bfe226cae234e068f50239661ece6">Mesh::setTranslation</a></div><div class="ttdeci">void setTranslation(cgp::Vector tvec)</div><div class="ttdoc">Setter for translation. </div><div class="ttdef"><b>Definition:</b> mesh.h:266</div></div>
 <div class="ttc" id="classcgp_1_1Vector_html"><div class="ttname"><a href="classcgp_1_1Vector.html">cgp::Vector</a></div><div class="ttdef"><b>Definition:</b> vecpnt.h:112</div></div>
 <div class="ttc" id="classMesh_html"><div class="ttname"><a href="classMesh.html">Mesh</a></div><div class="ttdoc">A triangle mesh in 3D space. </div><div class="ttdef"><b>Definition:</b> mesh.h:158</div></div>
 <div class="ttc" id="classMesh_html_a3b07d6e96410140e418940e84f7df74c"><div class="ttname"><a href="classMesh.html#a3b07d6e96410140e418940e84f7df74c">Mesh::col</a></div><div class="ttdeci">GLfloat * col</div><div class="ttdoc">(r,g,b,a) colour </div><div class="ttdef"><b>Definition:</b> mesh.h:164</div></div>
@@ -309,21 +317,21 @@ $(document).ready(function(){initNavTree('mesh_8h_source.html','');});
 <div class="ttc" id="classMesh_html_aeff28a33caaef5a72f425b120de1d996"><div class="ttname"><a href="classMesh.html#aeff28a33caaef5a72f425b120de1d996">Mesh::zrot</a></div><div class="ttdeci">float zrot</div><div class="ttdoc">rotation angles about x, y, and z axes </div><div class="ttdef"><b>Definition:</b> mesh.h:167</div></div>
 <div class="ttc" id="classSphere_html_aa53a0a515c22c2af28b0bce240cb3803"><div class="ttname"><a href="classSphere.html#aa53a0a515c22c2af28b0bce240cb3803">Sphere::Sphere</a></div><div class="ttdeci">Sphere(cgp::Point center, float radius)</div><div class="ttdoc">Constructor. </div><div class="ttdef"><b>Definition:</b> mesh.h:86</div></div>
 <div class="ttc" id="classMesh_html_a05536714c7e473d3f7eab0243185d9c6"><div class="ttname"><a href="classMesh.html#a05536714c7e473d3f7eab0243185d9c6">Mesh::tris</a></div><div class="ttdeci">std::vector&lt; Triangle &gt; tris</div><div class="ttdoc">triangles that join to make up the mesh </div><div class="ttdef"><b>Definition:</b> mesh.h:163</div></div>
-<div class="ttc" id="classMesh_html_a19b2e3e463043f7e4e3d1b88222a6364"><div class="ttname"><a href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">Mesh::getScale</a></div><div class="ttdeci">float getScale()</div><div class="ttdoc">Getter for scale. </div><div class="ttdef"><b>Definition:</b> mesh.h:255</div></div>
+<div class="ttc" id="classMesh_html_a19b2e3e463043f7e4e3d1b88222a6364"><div class="ttname"><a href="classMesh.html#a19b2e3e463043f7e4e3d1b88222a6364">Mesh::getScale</a></div><div class="ttdeci">float getScale()</div><div class="ttdoc">Getter for scale. </div><div class="ttdef"><b>Definition:</b> mesh.h:263</div></div>
 <div class="ttc" id="classShapeGeometry_html"><div class="ttname"><a href="classShapeGeometry.html">ShapeGeometry</a></div><div class="ttdoc">Geometry in a format suitable for OpenGL. </div><div class="ttdef"><b>Definition:</b> shape.h:28</div></div>
 <div class="ttc" id="classSphere_html_a7b89490ab37f9f6ff39a273616ab9c82"><div class="ttname"><a href="classSphere.html#a7b89490ab37f9f6ff39a273616ab9c82">Sphere::c</a></div><div class="ttdeci">cgp::Point c</div><div class="ttdoc">sphere center </div><div class="ttdef"><b>Definition:</b> mesh.h:70</div></div>
 <div class="ttc" id="classVoxelVolume_html"><div class="ttname"><a href="classVoxelVolume.html">VoxelVolume</a></div><div class="ttdoc">A cuboid volume regularly subdivided into uniformly sized cubes (voxels). </div><div class="ttdef"><b>Definition:</b> voxels.h:18</div></div>
 <div class="ttc" id="classBaseShape_html"><div class="ttname"><a href="classBaseShape.html">BaseShape</a></div><div class="ttdoc">Abstract base class for shapes. </div><div class="ttdef"><b>Definition:</b> mesh.h:41</div></div>
 <div class="ttc" id="classMesh_html_a61c3971017ebe11cb949d86ebd9b06a1"><div class="ttname"><a href="classMesh.html#a61c3971017ebe11cb949d86ebd9b06a1">Mesh::verts</a></div><div class="ttdeci">std::vector&lt; cgp::Point &gt; verts</div><div class="ttdoc">vertices of the tesselation structure </div><div class="ttdef"><b>Definition:</b> mesh.h:161</div></div>
-<div class="ttc" id="classMesh_html_aa601f3c71adc2dbd5ac5f68949c626ca"><div class="ttname"><a href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">Mesh::getTranslation</a></div><div class="ttdeci">cgp::Vector getTranslation()</div><div class="ttdoc">Getter for translation. </div><div class="ttdef"><b>Definition:</b> mesh.h:261</div></div>
+<div class="ttc" id="classMesh_html_aa601f3c71adc2dbd5ac5f68949c626ca"><div class="ttname"><a href="classMesh.html#aa601f3c71adc2dbd5ac5f68949c626ca">Mesh::getTranslation</a></div><div class="ttdeci">cgp::Vector getTranslation()</div><div class="ttdoc">Getter for translation. </div><div class="ttdef"><b>Definition:</b> mesh.h:269</div></div>
 <div class="ttc" id="classcgp_1_1BoundBox_html"><div class="ttname"><a href="classcgp_1_1BoundBox.html">cgp::BoundBox</a></div><div class="ttdoc">Bounding box in 3D space. </div><div class="ttdef"><b>Definition:</b> vecpnt.h:325</div></div>
 <div class="ttc" id="classView_html"><div class="ttname"><a href="classView.html">View</a></div><div class="ttdoc">Information structure for view control. </div><div class="ttdef"><b>Definition:</b> view.h:40</div></div>
-<div class="ttc" id="classMesh_html_a146b283b24cb8ebb8c2735a24c345243"><div class="ttname"><a href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">Mesh::geometry</a></div><div class="ttdeci">ShapeGeometry geometry</div><div class="ttdoc">renderable version of mesh </div><div class="ttdef"><b>Definition:</b> mesh.h:237</div></div>
+<div class="ttc" id="classMesh_html_a146b283b24cb8ebb8c2735a24c345243"><div class="ttname"><a href="classMesh.html#a146b283b24cb8ebb8c2735a24c345243">Mesh::geometry</a></div><div class="ttdeci">ShapeGeometry geometry</div><div class="ttdoc">renderable version of mesh </div><div class="ttdef"><b>Definition:</b> mesh.h:245</div></div>
 <div class="ttc" id="classMesh_html_a027072e9d4198f3599f8968ebd3beb5b"><div class="ttname"><a href="classMesh.html#a027072e9d4198f3599f8968ebd3beb5b">Mesh::boundspheres</a></div><div class="ttdeci">std::vector&lt; Sphere &gt; boundspheres</div><div class="ttdoc">bounding sphere accel structure </div><div class="ttdef"><b>Definition:</b> mesh.h:168</div></div>
 <div class="ttc" id="classMesh_html_a22ca27ef2f1bff3ef7e9ca62884f08e9"><div class="ttname"><a href="classMesh.html#a22ca27ef2f1bff3ef7e9ca62884f08e9">Mesh::trx</a></div><div class="ttdeci">cgp::Vector trx</div><div class="ttdoc">translation </div><div class="ttdef"><b>Definition:</b> mesh.h:166</div></div>
 <div class="ttc" id="classSphere_html"><div class="ttname"><a href="classSphere.html">Sphere</a></div><div class="ttdoc">A sphere in 3D space, consisting of a center and radius. </div><div class="ttdef"><b>Definition:</b> mesh.h:67</div></div>
-<div class="ttc" id="classMesh_html_a26b5ec6cfdb1ca1e2d7cb5b583d2604c"><div class="ttname"><a href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">Mesh::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdoc">Test whether mesh is empty of any geometry (true if empty, false otherwise) </div><div class="ttdef"><b>Definition:</b> mesh.h:249</div></div>
-<div class="ttc" id="classMesh_html_a3b6302fd1d1f668e84a92b1029081420"><div class="ttname"><a href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">Mesh::setRotations</a></div><div class="ttdeci">void setRotations(float ax, float ay, float az)</div><div class="ttdoc">Setter for rotation angles. </div><div class="ttdef"><b>Definition:</b> mesh.h:264</div></div>
+<div class="ttc" id="classMesh_html_a26b5ec6cfdb1ca1e2d7cb5b583d2604c"><div class="ttname"><a href="classMesh.html#a26b5ec6cfdb1ca1e2d7cb5b583d2604c">Mesh::empty</a></div><div class="ttdeci">bool empty()</div><div class="ttdoc">Test whether mesh is empty of any geometry (true if empty, false otherwise) </div><div class="ttdef"><b>Definition:</b> mesh.h:257</div></div>
+<div class="ttc" id="classMesh_html_a3b6302fd1d1f668e84a92b1029081420"><div class="ttname"><a href="classMesh.html#a3b6302fd1d1f668e84a92b1029081420">Mesh::setRotations</a></div><div class="ttdeci">void setRotations(float ax, float ay, float az)</div><div class="ttdoc">Setter for rotation angles. </div><div class="ttdef"><b>Definition:</b> mesh.h:272</div></div>
 <div class="ttc" id="classMesh_html_acf10c6ddf8437dedef24ee8ec2364956"><div class="ttname"><a href="classMesh.html#acf10c6ddf8437dedef24ee8ec2364956">Mesh::scale</a></div><div class="ttdeci">float scale</div><div class="ttdoc">scaling factor </div><div class="ttdef"><b>Definition:</b> mesh.h:165</div></div>
 <div class="ttc" id="classSphere_html_a3b7eca084b53bf1c1666b508d68c35fc"><div class="ttname"><a href="classSphere.html#a3b7eca084b53bf1c1666b508d68c35fc">Sphere::ind</a></div><div class="ttdeci">std::vector&lt; int &gt; ind</div><div class="ttdoc">triangle vertex indices included in the bounding sphere. Used for acceleration struct, otherwise ignored </div><div class="ttdef"><b>Definition:</b> mesh.h:72</div></div>
 <div class="ttc" id="structTriangle_html_a8444ff31cec668758c11fbe86c2ccac6"><div class="ttname"><a href="structTriangle.html#a8444ff31cec668758c11fbe86c2ccac6">Triangle::n</a></div><div class="ttdeci">cgp::Vector n</div><div class="ttdoc">outward facing unit normal to the triangle </div><div class="ttdef"><b>Definition:</b> mesh.h:27</div></div>
@@ -334,7 +342,7 @@ $(document).ready(function(){initNavTree('mesh_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_75b82e7e4a5feb05200b9ad7adf06257.html">home</a></li><li class="navelem"><a class="el" href="dir_833bb94fac794129235ee7fc3b2c8562.html">user</a></li><li class="navelem"><a class="el" href="dir_36e6ea0205cac95dfd4b6ae3f7235ccd.html">Honours</a></li><li class="navelem"><a class="el" href="dir_0f0cac3aea7df2a88806ea8d994ccb49.html">CGP</a></li><li class="navelem"><a class="el" href="dir_efedef80688aa60b7592f9873bda1122.html">Ass3</a></li><li class="navelem"><a class="el" href="dir_05399eeaa1dc0d789b4e26202fbcd387.html">cgp3-prep</a></li><li class="navelem"><a class="el" href="dir_ffdf3be8ffa9da7231d9581a9cafa279.html">cgp3-prep</a></li><li class="navelem"><a class="el" href="dir_5ad3dd2e199384266f992bc555fa8e4e.html">tesselate</a></li><li class="navelem"><a class="el" href="mesh_8h.html">mesh.h</a></li>
-    <li class="footer">Generated on Thu Mar 10 2016 17:35:19 for CGP by
+    <li class="footer">Generated on Sun Mar 13 2016 11:22:43 for CGP by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

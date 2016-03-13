@@ -280,6 +280,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a2a8d931a6b1baa3f34bc28f6f7f927fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a2a8d931a6b1baa3f34bc28f6f7f927fe">buildSphereAccel</a> (int maxspheres)</td></tr>
 <tr class="memdesc:a2a8d931a6b1baa3f34bc28f6f7f927fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create bounding sphere acceleration structure for mesh.  <a href="#a2a8d931a6b1baa3f34bc28f6f7f927fe">More...</a><br/></td></tr>
 <tr class="separator:a2a8d931a6b1baa3f34bc28f6f7f927fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033d35f0955198a6bc2816ab19ec7110"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a033d35f0955198a6bc2816ab19ec7110"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>hashEdgeSort</b> ()</td></tr>
+<tr class="separator:a033d35f0955198a6bc2816ab19ec7110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df840cbdd9164668e12ed5275323e28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4df840cbdd9164668e12ed5275323e28"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>buildAdjList</b> ()</td></tr>
+<tr class="separator:a4df840cbdd9164668e12ed5275323e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -321,6 +327,17 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMesh.html#a027072e9d4198f3599f8968ebd3beb5b">boundspheres</a></td></tr>
 <tr class="memdesc:a027072e9d4198f3599f8968ebd3beb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">bounding sphere accel structure <br/></td></tr>
 <tr class="separator:a027072e9d4198f3599f8968ebd3beb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fd04011ebe364e5d8f50816049798fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8fd04011ebe364e5d8f50816049798fa"></a>
+std::vector&lt; <a class="el" href="structEdge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>edges</b></td></tr>
+<tr class="separator:a8fd04011ebe364e5d8f50816049798fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bb7755dfe323ba072526c336d41eba3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8bb7755dfe323ba072526c336d41eba3"></a>
+std::unordered_map&lt; int, <br class="typebreak"/>
+vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>edgelookup</b></td></tr>
+<tr class="separator:a8bb7755dfe323ba072526c336d41eba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace157ecdf38410150688ae4a0d8ef24a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ace157ecdf38410150688ae4a0d8ef24a"></a>
+std::unordered_map&lt; int, <br class="typebreak"/>
+vector&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>adjList</b></td></tr>
+<tr class="separator:ace157ecdf38410150688ae4a0d8ef24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A triangle mesh in 3D space. </p>
@@ -347,7 +364,7 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>mesh::applyFFD to be completed for CGP Assignment3 </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>mesh::applyFFD to be completed for CGP Assignment3 </dd></dl>
 
 </div>
 </div>
@@ -730,7 +747,6 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>mesh::laplacianSmooth to be completed for CGP Assignment3 </dd></dl>
 
 </div>
 </div>
@@ -779,7 +795,6 @@ std::vector&lt; <a class="el" href="classSphere.html">Sphere</a> &gt;&#160;</td>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>mesh::marchingCubes to be completed for CGP Assignment3 </dd></dl>
 
 </div>
 </div>
@@ -995,7 +1010,7 @@ false otherwise </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMesh.html">Mesh</a></li>
-    <li class="footer">Generated on Thu Mar 10 2016 17:35:19 for CGP by
+    <li class="footer">Generated on Sun Mar 13 2016 11:22:43 for CGP by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

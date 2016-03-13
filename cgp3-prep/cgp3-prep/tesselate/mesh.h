@@ -311,7 +311,7 @@ public:
      * Apply marching cubes to a voxel volume to generate a mesh
      * (Required to shoehorn Bloyd's code into current framework - see http://paulbourke.net/geometry/polygonise/marchingsource.cpp)
      * @param vox           voxel volume
-     * @todo mesh::marchingCubes to be completed for CGP Assignment3
+     
      */
     void marchingCubes(VoxelVolume vox);
 
@@ -319,7 +319,7 @@ public:
      * Apply in-place simple Laplacian smoothing to the mesh
      * @param iter  number of smoothing iterations
      * @param rate  proportion of full Laplacian that is applied on each iteration
-     * @todo mesh::laplacianSmooth to be completed for CGP Assignment3
+
      */
     void laplacianSmooth(int iter, float rate);
 

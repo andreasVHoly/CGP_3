@@ -269,20 +269,35 @@ void ffd::deform(cgp::Point & pnt)
     t = t1/t2;
     u = u1/u2;
 
-//    cout << "s: " << s << " ,t: "<< t << " ,u: "<< u << endl;
-
     //get xffd elements s,t,u
 
-    float l = dimx, m = dimy, n = dimz;
-    cgp::Vector final;
+    //float l = dimx, m = dimy, n = dimz;
+    float l = dimx-1, m = dimy-1, n = dimz-1;
 
 
-    cgp::Vector ans1;
-    cgp::Vector ans2;
-    cgp::Vector ans3;
-    cgp::Vector add2;
-    cgp::Vector finalAns;
-    cgp::Vector cpVec;
+    for (int i = 0; i < l; i++){
+        for (int j = 0; j < m; j++){
+            for (int k = 0; k < n; k++){
+
+            }
+        }
+    }
+
+}
+
+float ffd::nChoosek( float n, float k )
+{
+    if (k > n) return 0;
+    if (k * 2 > n) k = n-k;
+    if (k == 0) return 1;
+
+    float result = n;
+    for( int i = 2; i <= k; ++i ) {
+        result *= (n-i+1);
+        result /= i;
+    }
+    return result;
+}
 
 
     /*for (int i = 0; i < l; i++){
@@ -313,6 +328,15 @@ void ffd::deform(cgp::Point & pnt)
         }
     }*/
 
+    /*
+
+    cgp::Vector final;
+    cgp::Vector ans1;
+    cgp::Vector ans2;
+    cgp::Vector ans3;
+    cgp::Vector add2;
+    cgp::Vector finalAns;
+    cgp::Vector cpVec;
     ans1.i = 1;
     ans1.j = 1;
     ans1.k = 1;
@@ -341,49 +365,25 @@ void ffd::deform(cgp::Point & pnt)
 
                 float value = (float)nChoosek(n,k) * (float)pow((1-u),n-k) * (float)pow(u,k);
                 cpVec.mult(value);
-                //cout << "mlut x: " << cpVec.i << ", mlut y: " << cpVec.j << ", mlut z: " << cpVec.k << endl ;
                 ans3.add(cpVec);
-                //cout << "ans3 x: " << ans3.i << ", ans3 y: " << ans3.j << ", ans3 z: " << ans3.k << endl ;
             }
 
             //multiply inner answers and new calculation
             float val2 = (float)nChoosek(m,j) * (float)pow((1-t),m-j) * (float)pow(t,j);
-            //cout << "value " << val2 << endl;
 
             ans2.mult(val2);
-            //cout << "ans21 x: " << ans2.i << ", ans21 y: " << ans2.j << ", ans21 z: " << ans2.k << endl ;
             ans2.mult(ans3);
-            //cout << "ans22 x: " << ans2.i << ", ans22 y: " << ans2.j << ", ans22 z: " << ans2.k << endl ;
             add2.add(ans2);
-            //cout << "add x: " << add2.i << ", add y: " << add2.j << ", add z: " << add2.k << endl ;
         }
         //multiplay inner answer and add
         ans1.mult(add2);
         ans1.mult((float)nChoosek(l,i) * (float)pow((1-s),l-i) * (float)pow(s,i));
-        //cout << "mult x: " << ans1.i << ", mult y: " << ans1.j << ", mult z: " << ans1.k << endl ;
         finalAns.add(ans1);
 
     }
 
 
-    //cout << "move x: " << ans1.i << ", move y: " << ans1.j << ", move z: " << ans1.k << endl ;
     //set point to new coordinates
     pnt.x = finalAns.i;
     pnt.y = finalAns.j;
-    pnt.z = finalAns.k;
-
-}
-
-unsigned int ffd::nChoosek( unsigned n, unsigned k )
-{
-    if (k > n) return 0;
-    if (k * 2 > n) k = n-k;
-    if (k == 0) return 1;
-
-    int result = n;
-    for( int i = 2; i <= k; ++i ) {
-        result *= (n-i+1);
-        result /= i;
-    }
-    return result;
-}
+    pnt.z = finalAns.k;*/
