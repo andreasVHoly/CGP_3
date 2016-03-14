@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <cstdint>
 #include <sstream>
+#include "tesselate/voxels.h"
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
@@ -33,6 +34,29 @@ void TestMesh::testAdjList(){
     cout << "\t...TESTED ADJ METHOD..." << endl;
 }
 
+void TestMesh::testMarchCube(){
+    cout << "\t...TESTING MARCH CUBE METHOD..." << endl;
+
+    /*VoxelVolume vox;
+    int dx, dy, dz;
+    cout << "test0" << endl;
+    dx = dy = dz = 4;
+    vox.setDim(dx, dy, dz);
+    vox.setFrame(cgp::Point(0.0f, 0.0f, 0.0f), cgp::Vector(0.5f, 0.5f, 0.5f)); // unit cube
+    vox.fill(false);
+    vox.set(1,0,0,true);
+    vox.set(0,1,0,true);
+    vox.set(0,0,1,true);
+    vox.set(0.5,1,0.5,true);
+    vox.set(0.5,0.5,1,true);
+    vox.set(0.5,1,1,true);
+    vox.set(1,1,0.5,true);
+    vox.set(1,0.5,1,true);
+    cout << "test1" << endl;
+    mesh->marchingCubes(vox);*/
+    //CPPUNIT_ASSERT();
+    cout << "\t...TESTED MARCH CUBE METHOD..." << endl;
+}
 
 
 void TestMesh::testMeshing()

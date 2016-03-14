@@ -235,7 +235,9 @@ int VoxelVolume::getMCVertIdx(int x, int y, int z)
     //go through the int
     for (int i = 0; i < 8; i++){
         //get the point of each of the 8 edges based on the calculation values in the cubePos
+        //we need to invert the below statement because we want to form a surface of the outside
         if (!get( (x + cubePos[i][0]) , (y + cubePos[i][1]) , (z + cubePos[i][2]) )){
+            //cout << i << " set" << endl;
             structure |= 1 << i;
         }
     }

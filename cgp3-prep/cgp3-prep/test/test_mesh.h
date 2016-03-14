@@ -12,6 +12,7 @@ class TestMesh : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE(TestMesh);
     CPPUNIT_TEST(testSmoothing);
     CPPUNIT_TEST(testAdjList);
+    CPPUNIT_TEST(testMarchCube);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -34,6 +35,7 @@ public:
 
     void testSmoothing();
     void testAdjList();
+    void testMarchCube();
 };
 
 #endif /* !TILER_TEST_MESH_H */

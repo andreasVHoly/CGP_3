@@ -27,8 +27,25 @@ void TestVoxels::tearDown()
 
 void TestVoxels::testHelperMethod(){
     cout << "\t...TESTING VOXEL HELPER METHOD..." << endl;
+    int dx, dy, dz;
+
+    dx = dy = dz = 4;
+    vox->setDim(dx, dy, dz);
+    vox->setFrame(cgp::Point(0.0f, 0.0f, 0.0f), cgp::Vector(1.0f, 1.0f, 1.0f)); // unit cube
+    vox->fill(false);
+
+    vox->set(2,2,2,true);//front left bottom
+    vox->set(3,3,3,true);//back right top
+    vox->set(2,3,3,true);//back
+    vox->set(3,2,3,true);
+    vox->set(3,3,2,true);
+    vox->set(3,2,2,true);
+    vox->set(2,2,3,true);
+    vox->set(2,3,2,true);
 
 
+    CPPUNIT_ASSERT(vox->getMCVertIdx(2,2,2) == 0);//front left corner of teh cube should be 0 (255 inverted)
+    CPPUNIT_ASSERT(vox->getMCVertIdx(0,0,0) == 255);//the front left of the voxel should be 255 (0 inverted)
 
     cout << "\t...TESTED VOXEL HELPER METHOD..." << endl;
 }

@@ -910,7 +910,6 @@ void Mesh::marchingCubes(VoxelVolume vox)
 
 
                 if (result == 0){
-                    //cout << "entirely outside" << endl;
                     //count++;
                     continue;//breaks
                 }
@@ -948,8 +947,6 @@ void Mesh::marchingCubes(VoxelVolume vox)
             }
         }
     }
-
-
     mergeVerts();
     deriveFaceNorms();
     deriveVertNorms();
@@ -959,7 +956,6 @@ void Mesh::laplacianSmooth(int iter, float rate)
 {
     //build the adjacency list
     buildAdjList();
-    //cout << adjList.size() << endl;
     //run it for iter amount of iterations
     for (int it = 0; it < iter; it++){
         //loop through the adjacency list
@@ -972,32 +968,21 @@ void Mesh::laplacianSmooth(int iter, float rate)
 
             //calculate the weight in the equation
             float weight = 1.0/(float)size;
-            cout << "weight " << weight << endl;
 
             for (int h = 0; h < size; h++){
-                cout << "first point " << verts[i->first].x << ","<< verts[i->first].y<<","<<verts[i->first].z<< endl;
-                cout << "second point " << verts[i->second[h]].x << ","<< verts[i->second[h]].y<<","<<verts[i->second[h]].z<< endl;
+
                 //get the adjcent vertex and cal the difference between them on each x,y,z
                 totalX += weight*(verts[i->second[h]].x - verts[i->first].x);
                 totalY += weight*(verts[i->second[h]].y - verts[i->first].y);
                 totalZ += weight*(verts[i->second[h]].z - verts[i->first].z);
-                cout << "vals" << endl;
-                cout << verts[i->second[h]].x << "," <<verts[i->first].x<< endl;
-                cout << verts[i->second[h]].y << "," <<verts[i->first].y<< endl;
-                cout << verts[i->second[h]].z << "," <<verts[i->first].z<< endl;
+
             }
             //multiply the sum by the rate we get
-            cout << "totals" << endl;
-            cout << totalX<< endl;
-            cout << totalY<< endl;
-            cout << totalZ<< endl;
+
             verts[i->first].x = verts[i->first].x + rate * totalX;
             verts[i->first].y = verts[i->first].y + rate * totalY;
             verts[i->first].z = verts[i->first].z + rate * totalZ;
-            cout << "finals" << endl;
-            cout << verts[i->first].x<< endl;
-            cout << verts[i->first].y<< endl;
-            cout << verts[i->first].z<< endl;
+
 
         }
     }
@@ -1021,16 +1006,9 @@ void Mesh::buildAdjList(){
     //loop through the triangle list and construct the adjacency hash
     for (int i = 0; i < tris.size(); i++){
         adjList[tris[i].v[0]].push_back(tris[i].v[1]);
-        cout << "pushed into : " << verts[tris[i].v[0]].x <<" "<<  verts[tris[i].v[1]].x << endl;
         adjList[tris[i].v[1]].push_back(tris[i].v[2]);
-        cout << "pushed into : " << verts[tris[i].v[1]].x <<" "<<  verts[tris[i].v[2]].x << endl;
         adjList[tris[i].v[2]].push_back(tris[i].v[0]);
-        cout << "pushed into : " << verts[tris[i].v[2]].x <<" "<<  verts[tris[i].v[0]].x << endl;
     }
-    cout << "in order pushed x's" << endl;
-    cout << verts[adjList[0][0]].x << endl;
-    cout << verts[adjList[1][0]].x  << endl;
-    cout << verts[adjList[2][0]].x  << endl;
 }
 
 
@@ -1660,9 +1638,6 @@ bool Mesh::setUpSmoothTest(){
     tri.v[1] = 1;
     tri.v[2] = 2;
 
-    cout << "vert 0's x " << verts[tri.v[0]].x << endl;
-    cout << "vert 1's x " << verts[tri.v[1]].x << endl;
-    cout << "vert 2's x " << verts[tri.v[2]].x << endl;
 
     tris.clear();
     tris.push_back(tri);
@@ -1702,9 +1677,6 @@ bool Mesh::setUpSmoothTest2(){
     tri.v[1] = 1;
     tri.v[2] = 2;
 
-    cout << "vert 0's x " << verts[tri.v[0]].x << endl;
-    cout << "vert 1's x " << verts[tri.v[1]].x << endl;
-    cout << "vert 2's x " << verts[tri.v[2]].x << endl;
 
     tris.clear();
     tris.push_back(tri);
@@ -1730,19 +1702,16 @@ bool Mesh::setUpSmoothTest2(){
     laplacianSmooth(2,0.2f);
     //check vertex 1
     if (verts[0].x != -0.539904f || verts[0].y != 0.806144f || verts[0].z != 0.806144f){
-        cout << "failed 1" << endl;
         return false;
     }
 
     //check vertex 2
     if (verts[1].x != 0.50048f || verts[1].y != 0.83072f || verts[1].z != 0.83072f){
-        cout << "failed 2" << endl;
         return false;
     }
 
     //check vertex 3
     if (verts[2].x != -0.0576f || verts[2].y != 0.3136f || verts[2].z != 0.3136f){
-        cout << "failed 3" << endl;
         return false;
     }
 

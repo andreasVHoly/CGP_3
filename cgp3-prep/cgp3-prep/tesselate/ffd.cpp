@@ -88,7 +88,6 @@ void ffd::reset()
                 float distZ = origin.z + z * diagonal.k/(dimz-1);
                 //temp point
                 cgp::Point point(distX,distY,distZ);
-                cout << "point: " << point.x << " " << point.y << " " << point.z << endl;
 
                 //create the control point
                 setCP(x,y,z,point);
@@ -324,7 +323,6 @@ void ffd::deform(cgp::Point & pnt)
         sumX.z += valueI * sumY.z;
     }
     //assign new point
-    cout << "final values for ffd " << sumX.x << " " << sumX.y << " " << sumX.z <<endl;
     pnt = sumX;
 }
 
