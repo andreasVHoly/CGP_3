@@ -963,9 +963,7 @@ void Mesh::laplacianSmooth(int iter, float rate)
     //run it for iter amount of iterations
     for (int it = 0; it < iter; it++){
         //loop through the adjacency list
-        for(auto i = adjList.begin(); i != adjList.end(); i++){
-
-
+        for(auto i = adjList.begin(); i != adjList.end(); ++i){
             //vi = vi + L * sum(wij (vj - vi))
 
             float totalX = 0, totalY = 0, totalZ = 0;
@@ -977,6 +975,8 @@ void Mesh::laplacianSmooth(int iter, float rate)
             cout << "weight " << weight << endl;
 
             for (int h = 0; h < size; h++){
+                cout << "first point " << verts[i->first].x << ","<< verts[i->first].y<<","<<verts[i->first].z<< endl;
+                cout << "second point " << verts[i->second[h]].x << ","<< verts[i->second[h]].y<<","<<verts[i->second[h]].z<< endl;
                 //get the adjcent vertex and cal the difference between them on each x,y,z
                 totalX += weight*(verts[i->second[h]].x - verts[i->first].x);
                 totalY += weight*(verts[i->second[h]].y - verts[i->first].y);
@@ -989,10 +989,15 @@ void Mesh::laplacianSmooth(int iter, float rate)
             //multiply the sum by the rate we get
             cout << "totals" << endl;
             cout << totalX<< endl;
-            cout << totalY<< endl;cout << totalZ<< endl;
+            cout << totalY<< endl;
+            cout << totalZ<< endl;
             verts[i->first].x = verts[i->first].x + rate * totalX;
             verts[i->first].y = verts[i->first].y + rate * totalY;
             verts[i->first].z = verts[i->first].z + rate * totalZ;
+            cout << "finals" << endl;
+            cout << verts[i->first].x<< endl;
+            cout << verts[i->first].y<< endl;
+            cout << verts[i->first].z<< endl;
 
         }
     }
@@ -1655,9 +1660,9 @@ bool Mesh::setUpSmoothTest(){
     tri.v[1] = 1;
     tri.v[2] = 2;
 
-    cout << "vert 0 " << verts[tri.v[0]].x << endl;
-    cout << "vert 1 " << verts[tri.v[1]].x << endl;
-    cout << "vert 2 " << verts[tri.v[2]].x << endl;
+    cout << "vert 0's x " << verts[tri.v[0]].x << endl;
+    cout << "vert 1's x " << verts[tri.v[1]].x << endl;
+    cout << "vert 2's x " << verts[tri.v[2]].x << endl;
 
     tris.clear();
     tris.push_back(tri);
@@ -1665,23 +1670,79 @@ bool Mesh::setUpSmoothTest(){
     //apply smoothing
     laplacianSmooth(1,0.5f);
     //check vertex 1
-    if (verts[0].x != 0 || verts[0].y != 0.2f || verts[0].z != 0.2f){
-        cout << verts[0].x << endl;
-        cout << verts[1].x << endl;
-        cout << verts[2].x << endl;
-        cout << "fail1 " << endl;
+    if (verts[0].x != 0.125f || verts[0].y != 0.375f || verts[0].z != 0.375f){
         return false;
     }
 
     //check vertex 2
-    if (verts[1].x != 0.7f || verts[1].y != 0.9f || verts[1].z != 0.9f){
-        cout << "fail2 " << endl;
+    if (verts[1].x != 0.25f || verts[1].y != 0.75f || verts[1].z != 0.75f){
         return false;
     }
 
     //check vertex 3
-    if (verts[2].x != -0.7f || verts[2].y != 0.9f || verts[2].z != 0.9f){
-        cout << "fail3 " << endl;
+    if (verts[2].x != -0.5f || verts[2].y != 0.5f || verts[2].z != 0.5f){
+        return false;
+    }
+
+    return true;
+
+}
+
+
+bool Mesh::setUpSmoothTest2(){
+    verts.clear();
+    //create triangle verts
+    verts.push_back(cgp::Point(0,0,0));
+    verts.push_back(cgp::Point(1,1,1));
+    verts.push_back(cgp::Point(-1,1,1));
+
+    //assign edges
+    Triangle tri;
+    tri.v[0] = 0;
+    tri.v[1] = 1;
+    tri.v[2] = 2;
+
+    cout << "vert 0's x " << verts[tri.v[0]].x << endl;
+    cout << "vert 1's x " << verts[tri.v[1]].x << endl;
+    cout << "vert 2's x " << verts[tri.v[2]].x << endl;
+
+    tris.clear();
+    tris.push_back(tri);
+
+    //apply smoothing  with 2 iterations and a 0.2 rate, we check the intermediate step to ensure the first calculation is correct
+    /*laplacianSmooth(1,0.2f);
+    //check vertex 1
+    if (verts[0].x != -0.8 || verts[0].y != 0.8f || verts[0].z != 0.8f){
+        return false;
+    }
+
+    //check vertex 2
+    if (verts[1].x != 0.64f || verts[1].y != 0.96f || verts[1].z != 0.96f){
+        return false;
+    }
+
+    //check vertex 3
+    if (verts[2].x != 0.128f || verts[2].y != 0.192f || verts[2].z != 0.192f){
+        return false;
+    }*/
+
+    //second iteration
+    laplacianSmooth(2,0.2f);
+    //check vertex 1
+    if (verts[0].x != -0.539904f || verts[0].y != 0.806144f || verts[0].z != 0.806144f){
+        cout << "failed 1" << endl;
+        return false;
+    }
+
+    //check vertex 2
+    if (verts[1].x != 0.50048f || verts[1].y != 0.83072f || verts[1].z != 0.83072f){
+        cout << "failed 2" << endl;
+        return false;
+    }
+
+    //check vertex 3
+    if (verts[2].x != -0.0576f || verts[2].y != 0.3136f || verts[2].z != 0.3136f){
+        cout << "failed 3" << endl;
         return false;
     }
 

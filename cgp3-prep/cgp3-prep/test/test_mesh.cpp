@@ -23,6 +23,7 @@ void TestMesh::tearDown()
 void TestMesh::testSmoothing(){
     cout << "\t...TESTING SMOOTHING METHOD..." << endl;
     CPPUNIT_ASSERT(mesh->setUpSmoothTest());
+    //CPPUNIT_ASSERT(mesh->setUpSmoothTest2());
     cout << "\t...TESTED SMOOTHING METHOD..." << endl;
 }
 

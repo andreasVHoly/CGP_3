@@ -24,11 +24,22 @@ void TestFFD::tearDown()
 
 void TestFFD::testNChooseK(){
     cout << "\t...TESTING N CHOOSE K METHOD..." << endl;
+
+    //testing basic case
+    float an1 = 1;
+    float an2 = 4;
+    float an3 = 6;
+    CPPUNIT_ASSERT(ffdobj->nChoosek(4,4) == an1);
+    CPPUNIT_ASSERT(ffdobj->nChoosek(4,3) == an2);
+    CPPUNIT_ASSERT(ffdobj->nChoosek(4,2) == an3);
+    CPPUNIT_ASSERT(ffdobj->nChoosek(4,1) == an2);
+    CPPUNIT_ASSERT(ffdobj->nChoosek(4,0) == an1);
+
     //answers calculated on calculator
     float ans1 = 56;
     float ans2 = 45;
     float ans3 = 13;
-
+    //testing bigger numbers
     CPPUNIT_ASSERT(ffdobj->nChoosek(8,3) == ans1);
     CPPUNIT_ASSERT(ffdobj->nChoosek(10,2) == ans2);
     CPPUNIT_ASSERT(ffdobj->nChoosek(13,12) == ans3);
@@ -74,7 +85,6 @@ void TestFFD::resetTest(){
     for (int i = 0; i < 2; i++){
         for (int j = 0; j < 2; j++){
             for (int k = 0; k < 2; k++ ){
-
                 CPPUNIT_ASSERT(answers[index].x == ffdobj->getCP(i,j,k).x);
                 CPPUNIT_ASSERT(answers[index].y == ffdobj->getCP(i,j,k).y);
                 CPPUNIT_ASSERT(answers[index].z == ffdobj->getCP(i,j,k).z);

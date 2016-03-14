@@ -386,6 +386,7 @@ public:
 
     bool checkAdjList();
     bool setUpSmoothTest();
+    bool setUpSmoothTest2();
 };
 
 #endif
