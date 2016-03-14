@@ -324,6 +324,7 @@ void ffd::deform(cgp::Point & pnt)
         sumX.z += valueI * sumY.z;
     }
     //assign new point
+    cout << "final values for ffd " << sumX.x << " " << sumX.y << " " << sumX.z <<endl;
     pnt = sumX;
 }
 

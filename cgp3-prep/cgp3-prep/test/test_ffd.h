@@ -13,6 +13,7 @@ class TestFFD : public CppUnit::TestFixture
     CPPUNIT_TEST(resetTest);
     CPPUNIT_TEST(testNChooseK);
     CPPUNIT_TEST(testSTU);
+    CPPUNIT_TEST(testDeform);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -32,6 +33,8 @@ public:
 
     bool STUSetUp();
     void testSTU();
+    void testDeform();
+    bool setUpDeform();
 
 
 };
