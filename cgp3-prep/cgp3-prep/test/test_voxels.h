@@ -34,6 +34,9 @@ public:
      * Check correspondence of voxel elements to 3D position
      */
     void testVoxelRegistration();
+
+
+    void testHelperMethod();
 };
 
 #endif /* !TILER_TEST_VOXEL_H */

@@ -73,7 +73,8 @@ void TestFFD::resetTest(){
     int index = 0;
     for (int i = 0; i < 2; i++){
         for (int j = 0; j < 2; j++){
-            for (int k = 0; k < 2; k++){
+            for (int k = 0; k < 2; k++ ){
+
                 CPPUNIT_ASSERT(answers[index].x == ffdobj->getCP(i,j,k).x);
                 CPPUNIT_ASSERT(answers[index].y == ffdobj->getCP(i,j,k).y);
                 CPPUNIT_ASSERT(answers[index].z == ffdobj->getCP(i,j,k).z);

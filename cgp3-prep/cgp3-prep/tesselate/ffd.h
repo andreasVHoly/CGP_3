@@ -40,6 +40,9 @@ private:
      */
     bool inCPBounds(int i, int j, int k);
 
+
+    std::vector<float> calcSTU(cgp::Point & pnt);
+
 public:
 
     float nChoosek( float n, float k );
@@ -138,7 +141,7 @@ public:
     /**
      * Apply free-form deformation to a point by embedding it in an undistorted lattice and then applying the deformation indicated by new control point positions
      * @param[out] pnt  Point undergoing deformation
-     
+
      */
     void deform(cgp::Point & pnt);
 };

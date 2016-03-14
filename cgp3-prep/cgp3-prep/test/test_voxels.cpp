@@ -24,6 +24,15 @@ void TestVoxels::tearDown()
     delete vox;
 }
 
+
+void TestVoxels::testHelperMethod(){
+    cout << "\t...TESTING VOXEL HELPER METHOD..." << endl;
+
+
+
+    cout << "\t...TESTED VOXEL HELPER METHOD..." << endl;
+}
+
 void TestVoxels::testVoxelSet()
 {
     int v, i, j, k, dx, dy, dz;

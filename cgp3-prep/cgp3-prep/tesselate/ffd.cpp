@@ -228,8 +228,8 @@ void ffd::setCP(int i, int j, int k, cgp::Point pnt)
         cp[i][j][k] = pnt;
 }
 
-void ffd::deform(cgp::Point & pnt)
-{
+
+std::vector<float> ffd::calcSTU(cgp::Point & pnt){
     //create S,T,U vectors from diagonal
     cgp::Vector S(diagonal.i,0.0,0.0);
     cgp::Vector T(0.0,diagonal.j,0.0);
@@ -271,6 +271,26 @@ void ffd::deform(cgp::Point & pnt)
     t = (float)t1/(float)t2;
     u = (float)u1/(float)u2;
 
+    std::vector<float> temp;
+    temp.push_back(s);
+    temp.push_back(t);
+    temp.push_back(u);
+
+    return temp;
+
+}
+
+
+void ffd::deform(cgp::Point & pnt)
+{
+
+    std::vector<float> stu;
+
+    stu = calcSTU(pnt);
+
+    float s = stu[0];
+    float t = stu[1];
+    float u = stu[2];
     //calculate xffd elements s,t,u
     //create l,m & n
     float l = dimx-1, m = dimy-1, n = dimz-1;
@@ -308,8 +328,8 @@ void ffd::deform(cgp::Point & pnt)
 }
 
 
-//method to calulate n choose k
-//method gotten from:
+//method to calulate the combination
+//method taken from below and changed to use floats:
 //http://stackoverflow.com/questions/9330915/number-of-combinations-n-choose-r-in-c
 float ffd::nChoosek( float n, float k )
 {
