@@ -12,6 +12,7 @@ class TestFFD : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE(TestFFD);
     CPPUNIT_TEST(resetTest);
     CPPUNIT_TEST(testNChooseK);
+    CPPUNIT_TEST(testSTU);
     CPPUNIT_TEST_SUITE_END();
 
 private:
@@ -28,6 +29,9 @@ public:
     void resetTest();
 
     void testNChooseK();
+
+    bool STUSetUp();
+    void testSTU();
 
 
 };

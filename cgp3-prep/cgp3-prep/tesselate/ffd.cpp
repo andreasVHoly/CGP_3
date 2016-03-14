@@ -271,12 +271,12 @@ std::vector<float> ffd::calcSTU(cgp::Point & pnt){
     t = (float)t1/(float)t2;
     u = (float)u1/(float)u2;
 
-    std::vector<float> temp;
+    std::vector<float>  temp;
     temp.push_back(s);
     temp.push_back(t);
     temp.push_back(u);
 
-    return temp;
+    return  temp;
 
 }
 

@@ -96,6 +96,30 @@ void TestFFD::resetTest(){
     cout << "\t...TESTED RESET METHOD..." << endl;
 }
 
+
+void TestFFD::testSTU(){
+    cout << "\t...TESTING STU METHOD..." << endl;
+    CPPUNIT_ASSERT(STUSetUp());
+    cout << "\t...TESTED STU METHOD..." << endl;
+}
+
+bool TestFFD::STUSetUp(){
+    //create lattice
+    cgp::Vector diag(2.0f, 2.0f, 2.0f);
+    cgp::Point corner(-1.0f, -1.0f, -1.0f);
+    ffdobj->setDim(2,2,2);
+    ffdobj->setFrame(corner,diag);
+
+    //calculating stu for point 0,0,0
+    cgp::Point point(0,0,0);
+    std::vector<float> stu = ffdobj->calcSTU(point);
+    //check values, these have been calculated by hand to get right answers
+    if (stu[0] != 0.5 || stu[1] != 0.5 || stu[2] != 0.5){
+        return false;
+    }
+    return true;
+}
+
 //#if 0 /* Disabled since it crashes the whole test suite */
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(TestFFD, TestSet::perBuild());
 //#endif

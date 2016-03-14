@@ -41,10 +41,10 @@ private:
     bool inCPBounds(int i, int j, int k);
 
 
-    std::vector<float> calcSTU(cgp::Point & pnt);
+
 
 public:
-
+    std::vector<float> calcSTU(cgp::Point & pnt);
     float nChoosek( float n, float k );
 
     ShapeGeometry geom;         ///< renderable version of non-active lattice
